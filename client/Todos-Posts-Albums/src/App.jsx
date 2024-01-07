@@ -1,47 +1,46 @@
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import { useState, createContext } from 'react';
-// import Home from './pages/Home';
-import Info from './pages/Info'; 
-import Albums from './pages/Albums';
-import Error from './pages/Error';
+import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
+import { createContext } from 'react';
+import useLocalStorage from './hooks/useLocalStorage';
 import Login from './pages/Login';
+import Home from './pages/Home';
+import Albums from './pages/Albums/Albums';
+import Photos from './pages/Albums/Photos';
+import Error from './pages/Error';
 import Register from './pages/Register';
 import CreateAccount from './pages/CreateAccount';
 import 'bootstrap/dist/css/bootstrap.min.css';
 export const UserContext = createContext();
+import UpdateTodo from './pages/Todos/UpdateTodo';
+import CreateNewTodo from './pages/Todos/CreateNewTodo';
+import DeletePhoto from './pages/Albums/DeletePhoto';
 
 
 function App() {
-  const [user, setUser] = useState(null);
+  const [user, setUser] = useLocalStorage('user', null);
 
   return (
     <BrowserRouter>
-      <UserContext.Provider value={{ user, setUser }}>
-        <Routes>
-          {/* <Route
-            path="/"
-            element={
-              <SharedLayout> */}
-           
-                {/* <Route index element={<Home />} /> */}
-               
-                <Route path="info" element={<Info />} />
-                {/* <Route
-                  path="albums"
-                  element={
-                    // <SharedProductLayout>
-                      <Route index element={<Albums />} />
-                    // </SharedProductLayout>
-                  } */}
-                {/* /> */}
-                <Route path="/" element={<Login />} />
-                <Route path="/register" element={<Register/>} />
-                <Route path="/create-account" element={<CreateAccount/>} />
-            {/* }
-          /> */}
+    <UserContext.Provider value={{ user, setUser }}>
+      <Routes>
+        <Route path="/" element={user ? <Home /> : <Navigate to="/login" />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/register" element={<Register />} />
+        <Route path="/create-account" element={<CreateAccount />} />
+        <Route path="/users/:userId" element={<User />}>
+            <Route path="albums" element={<Albums />}>
+              <Route path="photos" element={<Photos />} />
+              <Route path="delete-photo/:photoId" element={<DeletePhoto />} />
+            </Route>
+            <Route path="todos" element={<Todos />}>
+              <Route path="update/:todoId" element={<UpdateTodo />} />
+              <Route path="create-new" element={<CreateNewTodo />} />
+            </Route>
+          </Route>
+
+          <Route path="*" element={<Error />} />
         </Routes>
-      </UserContext.Provider>
-    </BrowserRouter>
+    </UserContext.Provider>
+  </BrowserRouter>
   );
 }
 

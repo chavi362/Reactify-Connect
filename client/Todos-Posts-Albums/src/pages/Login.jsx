@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
-import { useNavigate} from 'react-router-dom';
-import './form.css'
+import { useNavigate } from 'react-router-dom';
+import './form.css';
+import useFetch from '../hooks/useFetch';
 
 const Login = () => {
   const navigate = useNavigate();
@@ -8,27 +9,28 @@ const Login = () => {
     email: '',
     password: '',
   });
+
   const handleSubmit = async (e) => {
     e.preventDefault();
-    fetch(`http://localhost:3000/users?email=${formUser.email}`)
-      .then((response) => response.json())
-      .then((users) => {
-        const foundUser = users[0];
-        if (foundUser) {
-          if (foundUser.email === formUser.email && foundUser.password === formUser.password) {
-            console.log('Login successful');
-            navigate('/home');
-          } else {
-            console.log('Incorrect email or password');
-          }
+
+    try {
+      const users = useFetch(`users?email=${formUser.email}`);
+      const foundUser = users[0];
+      if (foundUser) {
+        if (foundUser.email === formUser.email && foundUser.website === formUser.password) {
+          console.log('Login successful');
+          navigate('/home');
         } else {
-          console.log('User not found');
+          console.log('Incorrect email or password');
         }
-      })
-      .catch((error) => {
-        console.error('Error fetching user:', error);
-      });
-  };  
+      } else {
+        console.log('User not found');
+      }
+    } catch (error) {
+      console.error('Error fetching user:', error);
+    }
+  };
+
   const handleChange = (event) => {
     const { name, value } = event.target;
     setFormUser((prevUser) => ({
@@ -36,12 +38,14 @@ const Login = () => {
       [name]: value,
     }));
   };
+
   const handleCreateNew = () => {
     navigate('/register');
   };
+
   return (
     <>
-      <section className="h-100 gradient-form" style={{ backgroundColor: '#eee' }}>
+     <section className="h-100 gradient-form" style={{ backgroundColor: '#eee' }}>
         <div className="container py-5 h-100">
           <div className="row d-flex justify-content-center align-items-center h-100">
             <div className="col-xl-10">
@@ -125,7 +129,7 @@ const Login = () => {
         </div>
       </div>
     </section >
-    </>
+  </>
   );
 };
 
