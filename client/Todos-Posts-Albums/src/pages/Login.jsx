@@ -1,19 +1,21 @@
 import React, { useState } from 'react';
+import { useNavigate} from 'react-router-dom';
 import './form.css'
 
 const Login = () => {
+  const navigate = useNavigate();
   const [formUser, setFormUser] = useState({
     email: '',
     password: '',
   });
   const handleSubmit = async (e) => {
     e.preventDefault();
-    fetch(`https://jsonplaceholder.typicode.com/users?email=${formUser.email}`)
+    fetch(`http://localhost:3000/users?email=${formUser.email}`)
       .then((response) => response.json())
       .then((users) => {
         const foundUser = users[0];
         if (foundUser) {
-          if (foundUser.email === formUser.email && foundUser.website === formUser.password) {
+          if (foundUser.email === formUser.email && foundUser.password === formUser.password) {
             console.log('Login successful');
             navigate('/home');
           } else {
@@ -22,8 +24,11 @@ const Login = () => {
         } else {
           console.log('User not found');
         }
+      })
+      .catch((error) => {
+        console.error('Error fetching user:', error);
       });
-  };
+  };  
   const handleChange = (event) => {
     const { name, value } = event.target;
     setFormUser((prevUser) => ({
@@ -31,7 +36,9 @@ const Login = () => {
       [name]: value,
     }));
   };
-
+  const handleCreateNew = () => {
+    navigate('/register');
+  };
   return (
     <>
       <section className="h-100 gradient-form" style={{ backgroundColor: '#eee' }}>
@@ -96,7 +103,7 @@ const Login = () => {
                         </div>
                         <div className="d-flex align-items-center justify-content-center pb-4">
                           <p className="mb-0 me-2">Don't have an account?</p>
-                          <button type="button" className="btn btn-outline-danger">
+                          <button type="button" className="btn btn-outline-danger"  onClick={handleCreateNew}>
                             Create new
                           </button>
                         </div>

@@ -5,6 +5,8 @@ import Info from './pages/Info';
 import Albums from './pages/Albums';
 import Error from './pages/Error';
 import Login from './pages/Login';
+import Register from './pages/Register';
+import CreateAccount from './pages/CreateAccount';
 import 'bootstrap/dist/css/bootstrap.min.css';
 export const UserContext = createContext();
 
@@ -33,6 +35,8 @@ function App() {
                   } */}
                 {/* /> */}
                 <Route path="/" element={<Login />} />
+                <Route path="/register" element={<Register/>} />
+                <Route path="/create-account" element={<CreateAccount/>} />
             {/* }
           /> */}
         </Routes>
