@@ -1,0 +1,17 @@
+
+$footer-background: #fccb90;
+$footer-text-color: #ffffff;
+
+.footer {
+  padding: 2rem 12rem;
+  background-color: $footer-background;
+  color: $footer-text-color;
+
+  @include respond(tab-land) {
+    padding: 2rem 6rem;
+  }
+
+  @include respond(phone) {
+    padding: 2rem;
+  }
+}
