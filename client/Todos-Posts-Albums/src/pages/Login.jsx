@@ -12,13 +12,18 @@ const Login = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
     try {
-      const users = useFetch(`users?email=${formUser.email}`);
+      const [users, error] = useFetch(`users?email=${formUser.email}`);
+      const [user, setUser] = useLocalStorage('user', null);
+      if (error) {
+        console.error('Error fetching user:', error);
+        return;
+      }
       const foundUser = users[0];
       if (foundUser) {
         if (foundUser.email === formUser.email && foundUser.website === formUser.password) {
           console.log('Login successful');
+          setUser(foundUser);
           navigate('/home');
         } else {
           console.log('Incorrect email or password');
@@ -27,7 +32,7 @@ const Login = () => {
         console.log('User not found');
       }
     } catch (error) {
-      console.error('Error fetching user:', error);
+      console.error('Error in handleSubmit:', error);
     }
   };
 

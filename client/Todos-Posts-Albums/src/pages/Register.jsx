@@ -10,7 +10,6 @@ const Register = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-  
     fetch(`http://localhost:3000/users?email=${user.email}`)
       .then((response) => response.json())
       .then((users) => {
@@ -22,7 +21,6 @@ const Register = () => {
             alert('Password must be at least 8 characters long and contain at least one uppercase letter, one lowercase letter, and one digit.');
             return;
           }
-  
           navigate(`/create-account?email=${user.email}&password=${user.password}`);
         }
       })

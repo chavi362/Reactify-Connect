@@ -5,6 +5,7 @@ import './form.css';
 const CreateAccount = () => {
   const navigate = useNavigate();
   const { email, password } = useParams();
+  
   const [formUser, setFormUser] = useState({
     name: "",
     username: "",
@@ -22,17 +23,18 @@ const CreateAccount = () => {
     bs: ""
   });
   useEffect(() => {
+    console.log('Current URL:', window.location.href);
+    console.log(email)
+  console.log(password)
     setFormUser((prevFormUser) => ({
       ...prevFormUser,
       email: email || prevFormUser.email,
       website: password || prevFormUser.website,
     }));
-  }, []);
+  }, [email, password]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log('Collected user details:', formUser);
-
     navigate('/home');
   };
 
@@ -64,10 +66,6 @@ const CreateAccount = () => {
 
                     <form onSubmit={handleSubmit}>
                       <p>Let's take more details....</p>
-
-                      {/* Email Input */}
-
-                      {/* Name Input */}
                       <div className="form-outline mb-4">
                         <input
                           id="form2Example33"
