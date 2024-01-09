@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
+import { BrowserRouter, Routes, Route, Navigate,Outlet  } from 'react-router-dom';
 import { createContext } from 'react';
 import useLocalStorage from './hooks/useLocalStorage';
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -23,25 +23,30 @@ function App() {
   const [user, setUser] = useLocalStorage('user', null);
   return (
     <BrowserRouter>
-       <UserContext.Provider value={user}>
-          <Routes>
-            <Route path="/" element={ <Layout/>} />
-            <Route path="/login" setUser={setUser} element={<Login updateUserContext={setUser}/>} />
+      <UserContext.Provider value={user}>
+        <Routes>
+          <Route path="/" element={<Layout />}>
+            <Route index element={<Home />} />
+            <Route path="/login" setUser={setUser} element={<Login updateUserContext={setUser} />} />
             <Route path="/register" element={<Register />} />
             <Route path="/create-account" element={<CreateAccount />} />
             <Route path="/users/:userId" element={<Info />}>
-              <Route path="albums" element={<AlbumsPage />}>
+              <Route path="albums" element={<Outlet />}>
+                {/* Nested routes for AlbumsPage */}
+                <Route index element={<AlbumsPage />} />
                 <Route path="photos" element={<Photos />} />
                 <Route path="delete-photo/:photoId" element={<DeletePhoto />} />
               </Route>
-              <Route path="todos" element={<Todos />}>
+              <Route path="todos" element={<Outlet />}>
+                {/* Nested routes for Todos */}
+                <Route index element={<Todos />} />
                 <Route path="update/:todoId" element={<UpdateTodo />} />
                 <Route path="create-new" element={<CreateNewTodo />} />
               </Route>
+              <Route path="*" element={<Error />} />
             </Route>
-            <Route path="*" element={<Error />} />
-          </Routes>
-      
+          </Route>
+        </Routes>
       </UserContext.Provider>
     </BrowserRouter>
   );

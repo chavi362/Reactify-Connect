@@ -15,20 +15,18 @@ const Login = (props) => {
     try {
       const response = await api.get(`users?email=${formUser.email}`);
       const users = response.data;
-
       if (response.error) {
         console.error('Error fetching user:', response.error);
         navigate('/error');
         return;
       }
-  
       if (Array.isArray(users) && users.length > 0) {
         const foundUser = users[0];
-        if (foundUser.email === formUser.email && foundUser.website === formUser.password) {
+        if (foundUser.email == formUser.email && foundUser.website == formUser.password) {
           console.log('Login successful');
           setUser(foundUser);
-          props.updateUserContext(formUser);
-          navigate('/home');
+          props.updateUserContext(foundUser);
+          navigate('/');
         } else {
           console.log('Incorrect email or password');
         }

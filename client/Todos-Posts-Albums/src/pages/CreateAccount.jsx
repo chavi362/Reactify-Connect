@@ -32,12 +32,10 @@ const CreateAccount = () => {
       website: password || prevFormUser.website,
     }));
   }, [email, password]);
-
   const handleSubmit = (e) => {
     e.preventDefault();
     navigate('/home');
   };
-
   const handleChange = (event) => {
     const { name, value } = event.target;
     setFormUser((prevUser) => ({
