@@ -1,29 +1,33 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import useLocalStorage from '../hooks/useLocalStorage';
+import api from '../Api';
 import './form.css';
-import useFetch from '../hooks/useFetch';
-
-const Login = () => {
+const Login = (props) => {
   const navigate = useNavigate();
+  const [user, setUser] = useLocalStorage('user', null);
   const [formUser, setFormUser] = useState({
     email: '',
     password: '',
   });
-
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-  
-      if (error) {
-        console.error('Error fetching user:', error);
-        navigate('/*'); 
+      const response = await api.get(`users?email=${formUser.email}`);
+      const users = response.data;
+
+      if (response.error) {
+        console.error('Error fetching user:', response.error);
+        navigate('/error');
         return;
       }
-      const foundUser = users[0];
-      if (foundUser) {
+  
+      if (Array.isArray(users) && users.length > 0) {
+        const foundUser = users[0];
         if (foundUser.email === formUser.email && foundUser.website === formUser.password) {
           console.log('Login successful');
           setUser(foundUser);
+          props.updateUserContext(formUser);
           navigate('/home');
         } else {
           console.log('Incorrect email or password');
@@ -33,9 +37,10 @@ const Login = () => {
       }
     } catch (error) {
       console.error('Error in handleSubmit:', error);
-      navigate('/error'); // Redirect to /error in case of an error
+      navigate('/error');
     }
   };
+  
 
   const handleChange = (event) => {
     const { name, value } = event.target;
@@ -51,7 +56,7 @@ const Login = () => {
 
   return (
     <>
-     <section className="h-100 gradient-form" style={{ backgroundColor: '#eee' }}>
+      <section className="h-100 gradient-form" style={{ backgroundColor: '#eee' }}>
         <div className="container py-5 h-100">
           <div className="row d-flex justify-content-center align-items-center h-100">
             <div className="col-xl-10">
@@ -113,7 +118,7 @@ const Login = () => {
                         </div>
                         <div className="d-flex align-items-center justify-content-center pb-4">
                           <p className="mb-0 me-2">Don't have an account?</p>
-                          <button type="button" className="btn btn-outline-danger"  onClick={handleCreateNew}>
+                          <button type="button" className="btn btn-outline-danger" onClick={handleCreateNew}>
                             Create new
                           </button>
                         </div>
@@ -126,16 +131,16 @@ const Login = () => {
                       <p className="small mb-0">
                         Welcome to our platform where you can explore and connect with a community driven by innovation and collaboration.
                         Unleash your potential as we strive to make a positive impact together. Join us on this exciting journey!
-                    </p>
+                      </p>
+                    </div>
                   </div>
                 </div>
               </div>
             </div>
           </div>
         </div>
-      </div>
-    </section >
-  </>
+      </section >
+    </>
   );
 };
 

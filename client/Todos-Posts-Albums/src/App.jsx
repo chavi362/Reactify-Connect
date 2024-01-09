@@ -7,7 +7,7 @@ import Info from './pages/Info';
 import Todos from './pages/Todos/Todos';
 import UpdateTodo from './pages/Todos/UpdateTodo';
 import CreateNewTodo from './pages/Todos/CreateNewTodo';
-import Albums from './pages/Albums/Albums';
+import AlbumsPage from './pages/Albums/AlbumsPage'
 import DeletePhoto from './pages/Albums/DeletePhoto';
 import Home from './pages/Home';
 import Error from './pages/Error';
@@ -26,11 +26,11 @@ function App() {
        <UserContext.Provider value={user}>
           <Routes>
             <Route path="/" element={ <Layout/>} />
-            <Route path="/login" setUser={setUser} element={<Login />} />
+            <Route path="/login" setUser={setUser} element={<Login updateUserContext={setUser}/>} />
             <Route path="/register" element={<Register />} />
             <Route path="/create-account" element={<CreateAccount />} />
             <Route path="/users/:userId" element={<Info />}>
-              <Route path="albums" element={<Albums />}>
+              <Route path="albums" element={<AlbumsPage />}>
                 <Route path="photos" element={<Photos />} />
                 <Route path="delete-photo/:photoId" element={<DeletePhoto />} />
               </Route>

@@ -1,6 +1,6 @@
 import React from 'react'
 
-const Albums = () => {
+const spiner = () => {
   return (
     <div>
       
@@ -8,4 +8,4 @@ const Albums = () => {
   )
 }
 
-export default Albums
+export default spiner

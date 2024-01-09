@@ -1,0 +1,23 @@
+@import '../../sass/variables';
+
+.button {
+    border-style: solid;
+    border-radius: 1px;
+    border-width: 3px;
+    border-color: $color-primary;
+    display: inline-block;
+    padding: .4rem .6rem;
+    text-decoration: none;
+    text-transform: uppercase;
+    background-color: $color-primary;
+    color: $color-white;
+
+    &:hover {
+        cursor: pointer;
+    }
+}
+
+.indicator {
+    margin: 0 1.4rem;
+    font-size: 2rem;
+}
