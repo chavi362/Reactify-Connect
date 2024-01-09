@@ -4,10 +4,8 @@ const useFetch = (urlParam) => {
   const [data, setData] = useState(null);
   const [error, setError] = useState(null);
   const baseUrl = 'http://localhost:3000/';
-
   useEffect(() => {
     const url = baseUrl + urlParam;
-
     fetch(url)
       .then((res) => {
         if (!res.ok) {
@@ -21,5 +19,4 @@ const useFetch = (urlParam) => {
 
   return [data, error];
 };
-
 export default useFetch;

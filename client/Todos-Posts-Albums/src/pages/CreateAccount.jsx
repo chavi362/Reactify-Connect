@@ -5,7 +5,7 @@ import './form.css';
 const CreateAccount = () => {
   const navigate = useNavigate();
   const { email, password } = useParams();
-  
+
   const [formUser, setFormUser] = useState({
     name: "",
     username: "",
@@ -25,7 +25,7 @@ const CreateAccount = () => {
   useEffect(() => {
     console.log('Current URL:', window.location.href);
     console.log(email)
-  console.log(password)
+    console.log(password)
     setFormUser((prevFormUser) => ({
       ...prevFormUser,
       email: email || prevFormUser.email,

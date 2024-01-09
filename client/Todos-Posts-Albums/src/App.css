@@ -20,3 +20,23 @@
   border-bottom-right-radius: .3rem;
   }
   }
+  .site-container {
+    display: flex;
+    flex-direction: column;
+    height: 100vh; 
+  }
+  
+  .site-container main {
+    flex: 1; 
+  }
+  #navbar
+  {
+    width: 100%;
+    margin-top: 0%;
+    padding-right: 15%;
+  }
+  
+  .site-wrapper {
+   height: 100%;
+   margin: 0%;
+  }

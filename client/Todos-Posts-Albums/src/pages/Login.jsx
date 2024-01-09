@@ -13,10 +13,10 @@ const Login = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const [users, error] = useFetch(`users?email=${formUser.email}`);
-      const [user, setUser] = useLocalStorage('user', null);
+  
       if (error) {
         console.error('Error fetching user:', error);
+        navigate('/*'); 
         return;
       }
       const foundUser = users[0];
@@ -33,6 +33,7 @@ const Login = () => {
       }
     } catch (error) {
       console.error('Error in handleSubmit:', error);
+      navigate('/error'); // Redirect to /error in case of an error
     }
   };
 
