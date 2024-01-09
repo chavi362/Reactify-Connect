@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import api from "../Api";
 
-const useFetch = (urlParam) => {
+const useGetData = (urlParam) => {
   const [data, setData] = useState(null);
   const [error, setError] = useState(null);
 
@@ -20,4 +20,4 @@ const useFetch = (urlParam) => {
   return [data, error];
 };
 
-export default useFetch;
+export default useGetData;

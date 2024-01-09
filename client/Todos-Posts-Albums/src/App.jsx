@@ -30,9 +30,8 @@ function App() {
             <Route path="/login" setUser={setUser} element={<Login updateUserContext={setUser} />} />
             <Route path="/register" element={<Register />} />
             <Route path="/create-account" element={<CreateAccount />} />
-            <Route path="/users/:userId" element={<Info />}>
+            {/* <Route path="/users/:userId" element={<Info />}> */}
               <Route path="albums" element={<Outlet />}>
-                {/* Nested routes for AlbumsPage */}
                 <Route index element={<AlbumsPage />} />
                 <Route path="photos" element={<Photos />} />
                 <Route path="delete-photo/:photoId" element={<DeletePhoto />} />
@@ -45,7 +44,7 @@ function App() {
               </Route>
               <Route path="*" element={<Error />} />
             </Route>
-          </Route>
+          {/* </Route> */}
         </Routes>
       </UserContext.Provider>
     </BrowserRouter>

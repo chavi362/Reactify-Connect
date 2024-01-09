@@ -2,7 +2,7 @@ import React, { useState, useEffect, useContext } from 'react';
 import AlbumList from '../../components/Albums/AlbumList';
 import Pagination from '../../components/Pagination/Pagination';
 import { Spinner } from 'react-bootstrap';
-import useFetch from '../../hooks/useFetch'
+import useGetData from '../../hooks/useGetData'
 
 import { UserContext } from '../../App';
 const AlbumsPage = () => {
@@ -13,7 +13,7 @@ const AlbumsPage = () => {
   const [nextPage, setNextPage] = useState(false);
   const [albums, setAlbums] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [data, error] = useFetch(`albums?userId=${user.Id}&_page=${page}&_limit=${perPage}`);
+  const [data, error] = useGetData(`albums?userId=${user.Id}&_page=${page}&_limit=${perPage}`);
   useEffect(() => {
     if (error) {
       console.error('Error fetching albums:', error);

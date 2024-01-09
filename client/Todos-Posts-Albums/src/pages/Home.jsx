@@ -6,7 +6,8 @@ const Home = () => {
   console.log(user);
   return (
     <div>
-      {user.username}
+      {/* {user.username} */}
+      chavi
     </div>
   )
 }
