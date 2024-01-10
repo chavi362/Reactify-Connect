@@ -78,7 +78,7 @@ const Login = (props) => {
                             type="email"
                             id="form2Example11"
                             className="form-control"
-                            placeholder="Phone number or email address"
+                            placeholder="Email address"
                             value={formUser.email}
                             onChange={handleChange}
                             name="email"
@@ -110,6 +110,7 @@ const Login = (props) => {
                           >
                             Log in
                           </button>
+                          <br></br>
                           <a className="text-muted" href="#!">
                             Forgot password?
                           </a>

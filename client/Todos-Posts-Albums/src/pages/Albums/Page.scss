@@ -1,0 +1,50 @@
+@import '../../sass/variables';
+@import '../../sass/media';
+
+.photosPage {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(20rem, 1fr));
+  grid-gap: .2rem;
+
+  @include respond(tab-land) {
+    grid-gap: 3rem;
+  }
+
+  @include respond(phone) {
+    grid-gap: 2rem;
+  }
+}
+
+.titleBar {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2rem;
+
+  @include respond(phone) {
+    flex-direction: column;
+    margin-bottom: 2.5rem;
+    text-align: center;
+  }
+}
+
+.closeBtn {
+  text-decoration: none;
+  color: $color-dark;
+  font-size: 2rem;
+  padding: 0 3rem;
+
+  @include respond(phone) {
+    padding: 0;
+  }
+
+  &:hover {
+    cursor: pointer;
+  }
+}
+
+.heading1 {
+  color: $color-dark;
+  letter-spacing: 1px;
+}

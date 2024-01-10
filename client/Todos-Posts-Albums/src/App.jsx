@@ -15,7 +15,7 @@ import Login from './pages/Login';
 import Register from './pages/Register';
 import CreateAccount from './pages/CreateAccount';
 import Layout from './components/Layout';
-import Photos from './pages/Albums/Photos';
+import Photos from './pages/Albums/PhotosPage';
 import './App.css'
 
 export const UserContext = createContext();
