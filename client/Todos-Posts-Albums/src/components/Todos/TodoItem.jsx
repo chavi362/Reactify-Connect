@@ -1,6 +1,6 @@
 import React from 'react';
 import { FaTrashAlt} from "react-icons/fa";
-const TodoItem = ({ id, title, completed }) => {
+const TodoItem = ({ id, title, completed,delete }) => {
     const handleDeleteClick = () => {
         // Handle delete click logic
     };
@@ -21,7 +21,7 @@ const TodoItem = ({ id, title, completed }) => {
                     />
                     {title}
                 </span>
-                <button onClick={handleDeleteClick} >
+                <button onClick={delete}>
 				<FaTrashAlt />
                 </button>
             </div>

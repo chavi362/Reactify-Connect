@@ -1,11 +1,62 @@
-import React from 'react';
+import React, { useState } from 'react';
 import TodoItem from './TodoItem';
-const TodoList = (props) => (
-    <ul className='list-group'>
-        {props.todos.map((todo) => (
-            <TodoItem key={todo.id} id={todo.id} title={todo.title} completed={todo.completed} />
-        ))}
-    </ul>
-);
+
+const TodoList = (props) => {
+    const [filter, setFilter] = useState('sequential'); 
+    const [searchTerm, setSearchTerm] = useState('');
+
+    const filterTodos = (todos) => {
+        switch (filter) {
+            case 'sequential':
+                return todos;
+            case 'completed':
+                return todos.filter((todo) => todo.completed);
+            case 'uncompleted':
+                return todos.filter((todo) => !todo.completed);
+            default:
+                return todos;
+        }
+    };
+
+    const searchTodos = (todos) => {
+        return todos.filter((todo) => {
+            return (
+                todo.id.toString().includes(searchTerm) ||
+                todo.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
+                todo.completed.toString().includes(searchTerm.toLowerCase())
+            );
+        });
+    };
+
+    const filteredTodos = searchTodos(filterTodos(props.todos));
+
+    return (
+        <div>
+            <div>
+                <label>
+                    Filter by:
+                    <select onChange={(e) => setFilter(e.target.value)}>
+                        <option value="sequential">Sequential</option>
+                        <option value="completed">Completed</option>
+                        <option value="uncompleted">Uncompleted</option>
+                    </select>
+                </label>
+                <label>
+                    Search:
+                    <input
+                        type="text"
+                        value={searchTerm}
+                        onChange={(e) => setSearchTerm(e.target.value)}
+                    />
+                </label>
+            </div>
+            <ul className='list-group'>
+                {filteredTodos.map((todo) => (
+                    <TodoItem key={todo.id} id={todo.id} title={todo.title} completed={todo.completed} delete={() => props.deleteTodo(todo.id)}/>
+                ))}
+            </ul>
+        </div>
+    );
+};
 
 export default TodoList;
