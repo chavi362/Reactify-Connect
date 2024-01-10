@@ -5,7 +5,6 @@ import useLocalStorage from './hooks/useLocalStorage';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Info from './pages/Info';
 import TodosPage from './pages/Todos/TodosPage';
-import UpdateTodo from './pages/Todos/UpdateTodo';
 import CreateNewTodo from './pages/Todos/CreateNewTodo';
 import AlbumsPage from './pages/Albums/AlbumsPage'
 import DeletePhoto from './pages/Albums/DeletePhoto';
@@ -39,7 +38,6 @@ function App() {
               <Route path="todos" element={<Outlet />}>
                 {/* Nested routes for Todos */}
                 <Route index element={<TodosPage/>} />
-                <Route path="update/:todoId" element={<UpdateTodo />} />
                 <Route path="create-new" element={<CreateNewTodo />} />
               </Route>
               <Route path="*" element={<Error />} />

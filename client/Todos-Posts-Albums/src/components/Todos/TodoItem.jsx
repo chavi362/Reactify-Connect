@@ -1,10 +1,6 @@
 import React from 'react';
 import { FaTrashAlt} from "react-icons/fa";
-const TodoItem = ({ id, title, completed,delete }) => {
-    const handleDeleteClick = () => {
-        // Handle delete click logic
-    };
-
+const TodoItem = ({ id, title, completed, deleteTodo }) => {
     const handleCheckboxClick = () => {
         // Handle checkbox click logic
     };
@@ -21,7 +17,7 @@ const TodoItem = ({ id, title, completed,delete }) => {
                     />
                     {title}
                 </span>
-                <button onClick={delete}>
+                <button onClick={deleteTodo}>
 				<FaTrashAlt />
                 </button>
             </div>
