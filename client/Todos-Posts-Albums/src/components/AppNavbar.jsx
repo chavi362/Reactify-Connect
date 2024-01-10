@@ -22,12 +22,20 @@ const AppNavbar = () => {
             Info
           </Nav.Link>
           <NavDropdown title="Posts" id="basic-nav-dropdown">
-            <NavDropdown.Item as={NavLink} to="/todos" activeClassName="active">
+            <NavDropdown.Item as={NavLink} to="/posts" activeClassName="active">
               All Posts
             </NavDropdown.Item>
             <NavDropdown.Item as={NavLink} to="/create-post" activeClassName="active">
               Create New Post
             </NavDropdown.Item>
+          </NavDropdown>
+          <NavDropdown title="Todos" id="basic-nav-dropdown">
+            <NavDropdown.Item as={NavLink} to="/todos" activeClassName="active">
+              All Todos
+            </NavDropdown.Item>
+            {/* <NavDropdown.Item as={NavLink} to="/create-post" activeClassName="active">
+              Create New Post
+            </NavDropdown.Item> */}
           </NavDropdown>
           <NavDropdown title="Albums" id="album-nav-dropdown">
             <NavDropdown.Item as={NavLink} to="/albums" activeClassName="active">

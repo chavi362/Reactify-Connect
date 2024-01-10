@@ -4,7 +4,7 @@ import { createContext } from 'react';
 import useLocalStorage from './hooks/useLocalStorage';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Info from './pages/Info';
-import Todos from './pages/Todos/Todos';
+import TodosPage from './pages/Todos/TodosPage';
 import UpdateTodo from './pages/Todos/UpdateTodo';
 import CreateNewTodo from './pages/Todos/CreateNewTodo';
 import AlbumsPage from './pages/Albums/AlbumsPage'
@@ -38,7 +38,7 @@ function App() {
               </Route>
               <Route path="todos" element={<Outlet />}>
                 {/* Nested routes for Todos */}
-                <Route index element={<Todos />} />
+                <Route index element={<TodosPage/>} />
                 <Route path="update/:todoId" element={<UpdateTodo />} />
                 <Route path="create-new" element={<CreateNewTodo />} />
               </Route>
