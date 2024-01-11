@@ -5,7 +5,6 @@ import useGetData from '../../hooks/useGetData';
 import { UserContext } from '../../App';
 import api from "../../Api";
 
-
 const TodosPage = () => {
 	const user = useContext(UserContext);
 	const [todos, setTodos] = useState([]);
@@ -17,7 +16,7 @@ const TodosPage = () => {
 			setTodos(data);
 		}
 	}, [data, error, loading]);
-	
+
 	const addTodo = async (todoTitle) => {
 		try {
 			setLoading(true); // Set loading to true when initiating the request
@@ -26,17 +25,13 @@ const TodosPage = () => {
 				title: todoTitle,
 				completed: false,
 			};
-	
 			// Add the new todo to the list
 			const response = await api.post('/todos', newTodo);
-	
-			// Assuming the response contains the newly added todo
 			const addedTodo = response.data;
-	
+
 			console.log('Todo added successfully');
-			const updatedTodos = [...todos, addedTodo];
-			setTodos(updatedTodos);
-			console.log(todos);
+			//const updatedTodos = [...todos, addedTodo];
+			setTodos((prevTodos) => [...prevTodos, addedTodo]);
 		} catch (error) {
 			console.error('Error adding todo:', error);
 			console.log('Detailed error response:', error.response);
@@ -44,40 +39,51 @@ const TodosPage = () => {
 			setLoading(false); // Set loading to false regardless of success or error
 		}
 	};
-	
-	
 	const deleteTodo = async (todoIdToDelete) => {
-        try {
+		try {
 			setLoading(true)
 			debugger;
-            await api.delete(`/todos/${todoIdToDelete}`);
-            setTodos((prevTodos) => prevTodos.filter((todo) => todo.id !== todoIdToDelete));
-            console.log(`Deleted todo with ID ${todoIdToDelete}`);
-        } catch (error) {
-            console.error('Error deleting todo:', error);
-		
-        }
-		finally{
+			await api.delete(`/todos/${todoIdToDelete}`);
+			setTodos((prevTodos) => prevTodos.filter((todo) => todo.id !== todoIdToDelete));
+			console.log(`Deleted todo with ID ${todoIdToDelete}`);
+		} catch (error) {
+			console.error('Error deleting todo:', error);
+		}
+		finally {
 			setLoading(false);
 		}
-    };
+	};
+	const updateTodo = async (todoToUpdate) => {
+		try {
+			setLoading(true);
+			await api.put(`/todos/${todoToUpdate.id}`, todoToUpdate);
+			setTodos((prevTodos) =>
+				prevTodos.map((todo) =>
+					todo.id === todoToUpdate.id ? { ...todoToUpdate } : todo
+				)
+			);
+			console.log(`Updated todo with ID ${todoToUpdate.id}`);
+		} catch (error) {
+			console.error('Error updating todo:', error);
+		} finally {
+			setLoading(false);
+		}
+	};
+	return (
+		<main>
+			<div>
+				<h1>This is what you have to do!</h1>
+			</div>
+			{loading ? (
+				<Spinner />
+			) : (
+				<>
+					<TodoList todos={todos} deleteTodo={deleteTodo} addTodo={addTodo} updateTodo={updateTodo}/>
+				</>
 
-return (
-	<main>
-		<div>
-			<h1>This is what you have to do!</h1>
-		</div>
-		{loading ? (
-			<Spinner />
-		) : (
-			<>
-		
-			<TodoList todos={todos} deleteTodo={deleteTodo}  addTodo={addTodo}/>
-			</>
-			
-		)}
-	</main>
-);
+			)}
+		</main>
+	);
 };
 
 export default TodosPage;

@@ -3,7 +3,7 @@ import TodoItem from './TodoItem';
 import AddTodoForm from './AddTodoForm';
 
 const TodoList = (props) => {
-    debugger;
+  
     const [filter, setFilter] = useState('sequential'); 
     const [searchTerm, setSearchTerm] = useState('');
 
@@ -18,7 +18,7 @@ const TodoList = (props) => {
             default:
                 return todos;
         }
-    };ו
+    };
     const searchTodos = (todos) => {
         return todos.filter((todo) => {
             return (
@@ -28,7 +28,7 @@ const TodoList = (props) => {
             );
         });
     };
-    
+
     const filteredTodos = searchTodos(filterTodos(props.todos));
 
     return (
@@ -54,7 +54,7 @@ const TodoList = (props) => {
             <AddTodoForm addTodo={props.addTodo}/>
             <ul className='list-group'>
                 {filteredTodos.map((todo) => (
-                    <TodoItem key={todo.id} id={todo.id} title={todo.title} completed={todo.completed} deleteTodo={() => props.deleteTodo(todo.id)}/>
+                    <TodoItem key={todo.id} todo={{ ...todo }} deleteTodo={() => props.deleteTodo(todo.id)}updateTodo={props.updateTodo} />
                 ))}
             </ul>
         </div>
