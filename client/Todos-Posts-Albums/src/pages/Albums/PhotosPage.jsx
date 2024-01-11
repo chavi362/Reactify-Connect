@@ -2,14 +2,20 @@ import React, { useState, useEffect, useContext } from 'react';
 import { Link } from 'react-router-dom';
 // import withLoader from '../../hoc/withLoader';
 // import AuxWithLoader from '../../hoc/withLoader';
-// import PhotoList from './PhotoList';
+import PhotoList from './PhotoList';
 // import AuthorDetails from './AuthorDetails';
-// import PhotoFullSize from './PhotoFullSize';
-// import './Page.scss'
+import PhotoFullSize from './PhotoFullSize';
+import './Page.scss'
+import useGetData from '../../hooks/useGetData';
 // import { UserContext } from '../../App';
 // import api from '../../Api';
 
 const PhotosPage = ({ match }) => {
+    const perPage = 10;
+    const [page, setPage] = useState(1);
+    const [albums, setAlbums] = useState([]);
+    const [prevPage, setPrevPage] = useState(false);
+  const [nextPage, setNextPage] = useState(false);
 //   const user = useContext(UserContext);
 //   const [album, setAlbum] = useState({ id: match.params.id, title: null });
 //   const [photos, setPhotos] = useState([]);
