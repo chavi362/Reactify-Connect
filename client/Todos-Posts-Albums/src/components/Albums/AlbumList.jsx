@@ -3,9 +3,9 @@ import './Album.scss'
 import AlbumItem from './AlbumItem';
 
 const AlbumList = (props) => (
-  <ul className='albumList'>
+  <ul className='row albumList'>
     {props.albums.map((album) => (
-      <AlbumItem key={album.id} id={album.id} title={album.title}  />
+      <AlbumItem className="col-md-4 mb-4" key={album.id} id={album.id} title={album.title}  />
     ))}
   </ul>
 );

@@ -10,7 +10,7 @@ const PhotosPage = () => {
     const location = useLocation();//ask vesily if it's correct way to sent thing from page to page
     const queryParams = new URLSearchParams(location.search);
     const albumId = queryParams.get('albumId');
-    const perPage = 10;
+    const perPage = 12;
     const [page, setPage] = useState(1);
     const [photos, setPhotos] = useState([]);
     const [prevPage, setPrevPage] = useState(false);
@@ -29,7 +29,6 @@ const PhotosPage = () => {
             setLoading(false);
         }
     };
-
     useEffect(() => {
         fetchData();
     }, [albumId, page, perPage]);

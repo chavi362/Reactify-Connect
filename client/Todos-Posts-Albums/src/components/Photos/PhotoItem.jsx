@@ -5,7 +5,7 @@ import './Photos.scss'
 
 const PhotoItem = (props) => {
   return (
-    <div className="card" style={{width: '18rem'}}>
+    <div className="card" style={{ width: '18rem', margin:'10px'}}>
       <img className="card-img-top" src={props.thumbnailUrl} alt="Card image cap" onClick={() => { props.fullSize(props.url) }}></img>
       <div className="card-body">
         <p className="card-text">{props.title}</p>
