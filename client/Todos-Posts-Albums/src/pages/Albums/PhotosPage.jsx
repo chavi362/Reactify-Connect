@@ -60,16 +60,13 @@ const PhotosPage = () => {
         setImgFullSize(false);
         setFullSizeURL(null);
     };
-
     const pagination = (headers) => {
         const links = headers.split(',');
 
         // State representation of pages availability
         const pages = { nextPage: false, prevPage: false };
-
         links.forEach((link) => {
             const temp = link.split(';');
-
             // Switching on link.rel
             switch (temp[1].replace(/\s/g, '')) {
                 case 'rel="next"':
@@ -107,7 +104,7 @@ const PhotosPage = () => {
             ) : (
                 <div className="photosPage">
                     <PhotoList photos={photos} photoClick={displayFullSize} />
-                    <PhotoFullSize show={imgFullSize} url={fullSizeURL} close={closeFullSize} />
+                    {/* <PhotoFullSize show={imgFullSize} url={fullSizeURL} close={closeFullSize} /> */}
                     <Pagination isNext={nextPage} isPrev={prevPage} current={page} nextPage={loadNextPage} prevPage={loadPrevPage} />
                 </div>
             )}
