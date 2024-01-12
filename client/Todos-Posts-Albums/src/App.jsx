@@ -14,7 +14,7 @@ import Login from './pages/Login';
 import Register from './pages/Register';
 import CreateAccount from './pages/CreateAccount';
 import Layout from './components/Layout';
-import Photos from './pages/Albums/PhotosPage';
+import PhotosPage from './pages/Albums/PhotosPage';
 import './App.css'
 
 export const UserContext = createContext();
@@ -32,7 +32,7 @@ function App() {
             {/* <Route path="/users/:userId" element={<Info />}> */}
               <Route path="albums" element={<Outlet />}>
                 <Route index element={<AlbumsPage />} />
-                <Route path="photos" element={<Photos />} />
+                <Route path=":albumid/photos" element={<PhotosPage />} />
                 <Route path="delete-photo/:photoId" element={<DeletePhoto />} />
               </Route>
               <Route path="todos" element={<Outlet />}>

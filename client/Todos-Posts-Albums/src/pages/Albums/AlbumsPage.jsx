@@ -3,8 +3,6 @@ import AlbumList from '../../components/Albums/AlbumList';
 import Pagination from '../../components/Pagination/Pagination';
 import { Spinner } from 'react-bootstrap';
 import useGetData from '../../hooks/useGetData'
- // const [prevPage, setPrevPage] = useState(false);
-  // const [nextPage, setNextPage] = useState(false);
 import { UserContext } from '../../App';
 const AlbumsPage = () => {
   const user = useContext(UserContext);

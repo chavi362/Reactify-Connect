@@ -1,7 +1,7 @@
 import React from 'react';
 
 import './Photos.scss'
-import React from 'react'
+
 
 const PhotoItem = (props) => {
   return (

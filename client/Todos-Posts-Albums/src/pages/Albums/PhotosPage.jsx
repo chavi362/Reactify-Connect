@@ -1,87 +1,118 @@
-import React, { useState, useEffect, useContext } from 'react';
-import { Link } from 'react-router-dom';
-// import withLoader from '../../hoc/withLoader';
-// import AuxWithLoader from '../../hoc/withLoader';
-import PhotoList from './PhotoList';
-// import AuthorDetails from './AuthorDetails';
-import PhotoFullSize from './PhotoFullSize';
-import './Page.scss'
-import useGetData from '../../hooks/useGetData';
-// import { UserContext } from '../../App';
-// import api from '../../Api';
+import React, { useState, useEffect } from 'react';
+import { Link, useLocation } from 'react-router-dom';
+import { Spinner } from 'react-bootstrap';
+import PhotoList from '../../components/Photos/PhotoList';
+import PhotoFullSize from '../../components/Photos/PhotoFullSize';
+import Pagination from '../../components/Pagination/Pagination';
+import api from '../../Api';
 
-const PhotosPage = ({ match }) => {
+const PhotosPage = () => {
+    const location = useLocation();//ask vesily if it's correct way to sent thing from page to page
+    const queryParams = new URLSearchParams(location.search);
+    const albumId = queryParams.get('albumId');
+    console.log(albumId);
     const perPage = 10;
     const [page, setPage] = useState(1);
-    const [albums, setAlbums] = useState([]);
+    const [photos, setPhotos] = useState([]);
     const [prevPage, setPrevPage] = useState(false);
-  const [nextPage, setNextPage] = useState(false);
-//   const user = useContext(UserContext);
-//   const [album, setAlbum] = useState({ id: match.params.id, title: null });
-//   const [photos, setPhotos] = useState([]);
-//   const [posts, setPosts] = useState([]);
-//   const [loading, setLoading] = useState(false);
-//   const [imgFullSize, setImgFullSize] = useState(false);
-//   const [fullSizeURL, setFullSizeURL] = useState(null);
-//   const getAlbum = async (id) => {
-//     const album = await api.get(`albums/${id}`);
-//     setAlbum(album.data);
-//   };
+    const [nextPage, setNextPage] = useState(false);
+    const [loading, setLoading] = useState(true);
+    const [imgFullSize, setImgFullSize] = useState(false);
+    const [fullSizeURL, setFullSizeURL] = useState(null);
+    const fetchData = async () => {
+        try {
+            const response = await api.get(`photos?albumId=${albumId}&_page=${page}&_limit=${perPage}`);
+            setPhotos(response.data);
+            pagination(response.headers.link);
+        } catch (error) {
+            console.error(error);
+        } finally {
+            setLoading(false);
+        }
+    };
 
-//   const getAlbumPhotos = async (albumId) => {
-//     const photos = await api.get(`photos?albumId=${albumId}`);
-//     setPhotos(photos.data);
-//   };
+    useEffect(() => {
+        fetchData();
+    }, [albumId, page, perPage]);
 
-//   const getUserPosts = async (userId) => {
-//     // Limit TWO posts only
-//     const posts = await api.get(`posts?userId=${userId}&_limit=2`);
-//     setPosts(posts.data);
-//   };
 
-//   const displayFullSize = (url) => {
-//     setImgFullSize(true);
-//     setFullSizeURL(url);
-//   };
+    const deletePhoto = async (photoIdToDelete) => {
+        try {
+            setLoading(true)
+            debugger;
+            await api.delete(`/photos/${photoIdToDelete}`);
+            setPhotos((prevTodos) => prevTodos.filter((todo) => todo.id !== photoIdToDelete));
+            console.log(`Deleted photo with ID ${photoIdToDelete}`);
+        } catch (error) {
+            console.error('Error deleting photo:', error);
+        }
+        finally {
+            setLoading(false);
+        }
+    };
 
-//   const closeFullSize = () => {
-//     setImgFullSize(false);
-//     setFullSizeURL(null);
-//   };
+    const displayFullSize = (url) => {
+        setImgFullSize(true);
+        setFullSizeURL(url);
+    };
 
-//   useEffect(() => {
-//     const fetchData = async () => {
-//       // TODO: Redirect or throw error if album doesn't exist
-//       setLoading(true);
+    const closeFullSize = () => {
+        setImgFullSize(false);
+        setFullSizeURL(null);
+    };
 
-//       const albumData = await getAlbum(album.id);
-//       const { userId, id } = albumData;
+    const pagination = (headers) => {
+        const links = headers.split(',');
 
-//       await getAlbumPhotos(id);
-//       await getUserPosts(userId);
+        // State representation of pages availability
+        const pages = { nextPage: false, prevPage: false };
 
-//       setLoading(false);
-//     };
+        links.forEach((link) => {
+            const temp = link.split(';');
 
-//     fetchData();
-//   }, [album.id]);
+            // Switching on link.rel
+            switch (temp[1].replace(/\s/g, '')) {
+                case 'rel="next"':
+                    pages.nextPage = true;
+                    break;
+                case 'rel="prev"':
+                    pages.prevPage = true;
+                    break;
+                default:
+                    break;
+            }
+        });
+        setNextPage(pages.nextPage);
+        setPrevPage(pages.prevPage);
+    };
 
-//   return (
-//     <main>
-//       <AuxWithLoader loading={loading}>
-//         <div className="titleBar">
-//           <h1 className="heading1">Album: {album.title}</h1>
-//           <Link className="closeBtn" to='/'>Close X</Link>
-//         </div>
+    const loadNextPage = () => {
+        setPage(page + 1);
+    };
 
-//         <div className="photosPage">
-//           <PhotoList photos={photos} photoClick={displayFullSize} />
-//           <AuthorDetails info={user} posts={posts} />
-//         </div>
-//       </AuxWithLoader>
-//       <PhotoFullSize show={imgFullSize} url={fullSizeURL} close={closeFullSize} />
-//     </main>
-//   );
+    const loadPrevPage = () => {
+        setPage(page - 1);
+    };
+
+    return (
+        <main>
+            <div className="titleBar">
+                <h1 className="heading1">Album: {/* You need to fetch album data or provide it from somewhere */}</h1>
+                <Link className="closeBtn" to='/'>Close X</Link>
+            </div>
+            {loading ? (
+                <Spinner animation="border" role="status">
+                    <span className="sr-only">Loading...</span>
+                </Spinner>
+            ) : (
+                <div className="photosPage">
+                    <PhotoList photos={photos} photoClick={displayFullSize} />
+                    <PhotoFullSize show={imgFullSize} url={fullSizeURL} close={closeFullSize} />
+                    <Pagination isNext={nextPage} isPrev={prevPage} current={page} nextPage={loadNextPage} prevPage={loadPrevPage} />
+                </div>
+            )}
+        </main>
+    );
 };
 
 export default PhotosPage;

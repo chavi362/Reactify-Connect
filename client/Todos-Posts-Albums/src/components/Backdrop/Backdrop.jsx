@@ -1,7 +1,5 @@
 import React from "react";
 import './Backdrop.scss'
-import React from 'react'
-
 const Backdrop = (props) => {
   return (
     <div>
@@ -9,6 +7,4 @@ const Backdrop = (props) => {
     </div>
   )
 }
-
 export default Backdrop
-props
