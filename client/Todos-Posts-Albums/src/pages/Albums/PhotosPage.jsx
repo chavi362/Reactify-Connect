@@ -10,7 +10,6 @@ const PhotosPage = () => {
     const location = useLocation();//ask vesily if it's correct way to sent thing from page to page
     const queryParams = new URLSearchParams(location.search);
     const albumId = queryParams.get('albumId');
-    console.log(albumId);
     const perPage = 10;
     const [page, setPage] = useState(1);
     const [photos, setPhotos] = useState([]);
@@ -34,8 +33,6 @@ const PhotosPage = () => {
     useEffect(() => {
         fetchData();
     }, [albumId, page, perPage]);
-
-
     const deletePhoto = async (photoIdToDelete) => {
         try {
             setLoading(true)
@@ -103,7 +100,7 @@ const PhotosPage = () => {
                 </Spinner>
             ) : (
                 <div className="photosPage">
-                    <PhotoList photos={photos} photoClick={displayFullSize} />
+                    <PhotoList photos={photos} photoClick={displayFullSize} deletePhoto={deletePhoto} />
                     {/* <PhotoFullSize show={imgFullSize} url={fullSizeURL} close={closeFullSize} /> */}
                     <Pagination isNext={nextPage} isPrev={prevPage} current={page} nextPage={loadNextPage} prevPage={loadPrevPage} />
                 </div>

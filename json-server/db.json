@@ -4608,20 +4608,6 @@
   "photos": [
     {
       "albumId": 1,
-      "id": 1,
-      "title": "accusamus beatae ad facilis cum similique qui sunt",
-      "url": "https://via.placeholder.com/600/92c952",
-      "thumbnailUrl": "https://via.placeholder.com/150/92c952"
-    },
-    {
-      "albumId": 1,
-      "id": 2,
-      "title": "reprehenderit est deserunt velit ipsam",
-      "url": "https://via.placeholder.com/600/771796",
-      "thumbnailUrl": "https://via.placeholder.com/150/771796"
-    },
-    {
-      "albumId": 1,
       "id": 3,
       "title": "officia porro iure quia iusto qui ipsa ut modi",
       "url": "https://via.placeholder.com/600/24f355",
@@ -4692,24 +4678,10 @@
     },
     {
       "albumId": 1,
-      "id": 13,
-      "title": "repudiandae iusto deleniti rerum",
-      "url": "https://via.placeholder.com/600/197d29",
-      "thumbnailUrl": "https://via.placeholder.com/150/197d29"
-    },
-    {
-      "albumId": 1,
       "id": 14,
       "title": "est necessitatibus architecto ut laborum",
       "url": "https://via.placeholder.com/600/61a65",
       "thumbnailUrl": "https://via.placeholder.com/150/61a65"
-    },
-    {
-      "albumId": 1,
-      "id": 15,
-      "title": "harum dicta similique quis dolore earum ex qui",
-      "url": "https://via.placeholder.com/600/f9cee5",
-      "thumbnailUrl": "https://via.placeholder.com/150/f9cee5"
     },
     {
       "albumId": 1,
