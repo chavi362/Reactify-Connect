@@ -1,6 +1,6 @@
 import React from 'react'
 
-const CreateNewTodo = () => {
+const FullPost = () => {
   return (
     <div>
       
@@ -8,4 +8,4 @@ const CreateNewTodo = () => {
   )
 }
 
-export default CreateNewTodo
+export default FullPost

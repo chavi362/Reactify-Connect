@@ -5,7 +5,6 @@ import useLocalStorage from './hooks/useLocalStorage';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Info from './pages/Info';
 import TodosPage from './pages/Todos/TodosPage';
-import CreateNewTodo from './pages/Todos/CreateNewTodo';
 import AlbumsPage from './pages/Albums/AlbumsPage'
 import DeletePhoto from './pages/Albums/DeletePhoto';
 import Home from './pages/Home';
@@ -15,6 +14,8 @@ import Register from './pages/Register';
 import CreateAccount from './pages/CreateAccount';
 import Layout from './components/Layout';
 import PhotosPage from './pages/Albums/PhotosPage';
+import PostsPage from './pages/PostsPage';
+import FullPost from './pages/FullPost';
 import './App.css'
 
 export const UserContext = createContext();
@@ -33,12 +34,14 @@ function App() {
               <Route path="albums" element={<Outlet />}>
                 <Route index element={<AlbumsPage />} />
                 <Route path=":albumid/photos" element={<PhotosPage />} />
-                <Route path="delete-photo/:photoId" element={<DeletePhoto />} />
               </Route>
+              <Route path="posts" element={<Outlet />}>
+                <Route index element={<PostsPage />} />
+                <Route path=":postId/" element={<FullPost />} />
+                </Route>
               <Route path="todos" element={<Outlet />}>
                 {/* Nested routes for Todos */}
                 <Route index element={<TodosPage/>} />
-                <Route path="create-new" element={<CreateNewTodo />} />
               </Route>
               <Route path="*" element={<Error />} />
             </Route>
