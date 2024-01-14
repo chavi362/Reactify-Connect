@@ -49,7 +49,7 @@ const Login = (props) => {
   };
 
   const handleCreateNew = () => {
-    navigate('/register');
+    navigate('/register');//ask vesily
   };
 
   return (

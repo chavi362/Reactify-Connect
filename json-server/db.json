@@ -4622,17 +4622,10 @@
     },
     {
       "albumId": 1,
-      "id": 5,
-      "title": "chavi chaimson ",
-      "url": "https://via.placeholder.com/600/f66b97",
-      "thumbnailUrl": "https://via.placeholder.com/150/f66b97"
-    },
-    {
-      "albumId": 1,
       "id": 6,
       "title": "accusamus ea aliquid et amet sequi nemo",
       "url": "https://via.placeholder.com/600/56a8c2",
-      "thumbnailUrl": "https://via.placeholder.com/150/56a8c2"
+      "thumbnailUrl": "https://via.placeholder.com/150/"
     },
     {
       "albumId": 1,
@@ -39799,22 +39792,10 @@
   ],
   "todos": [
     {
-      "userId": 1,
-      "id": 20,
-      "title": "ullam nobis libeftchadsgdg",
-      "completed": true
-    },
-    {
       "userId": 2,
       "id": 24,
-      "title": "adipisci non ad dicta qui amet quaerat doloribus ea",
+      "title": "chavi",
       "completed": false
-    },
-    {
-      "userId": 2,
-      "id": 25,
-      "title": "voluptas quo tenetur perspiciatis explicabo natus",
-      "completed": true
     },
     {
       "userId": 2,
@@ -40910,21 +40891,27 @@
     },
     {
       "userId": 1,
-      "title": "dsgg",
-      "completed": false,
-      "id": 209
-    },
-    {
-      "userId": 1,
-      "title": "chavi cgashrr",
-      "completed": false,
-      "id": 212
-    },
-    {
-      "userId": 1,
       "title": "wu55u vh.hl.j.; do homework",
       "completed": true,
       "id": 213
+    },
+    {
+      "userId": 1,
+      "title": "xzv",
+      "completed": false,
+      "id": 214
+    },
+    {
+      "userId": 1,
+      "title": "Chavi Chaimson",
+      "completed": false,
+      "id": 215
+    },
+    {
+      "userId": 1,
+      "title": "Chaccg",
+      "completed": false,
+      "id": 216
     }
   ]
 }

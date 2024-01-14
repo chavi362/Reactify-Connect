@@ -3,10 +3,8 @@ import { BrowserRouter, Routes, Route, Navigate,Outlet  } from 'react-router-dom
 import { createContext } from 'react';
 import useLocalStorage from './hooks/useLocalStorage';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import Info from './pages/Info';
 import TodosPage from './pages/Todos/TodosPage';
 import AlbumsPage from './pages/Albums/AlbumsPage'
-import DeletePhoto from './pages/Albums/DeletePhoto';
 import Home from './pages/Home';
 import Error from './pages/Error';
 import Login from './pages/Login';

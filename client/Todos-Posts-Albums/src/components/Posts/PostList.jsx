@@ -6,7 +6,7 @@ const PostList = (props) => {
         {
             props.posts.map((post)=>
             (
-                <PostItem key={post.id} post={post} handleUpdateClick={()=>props.handleUpdateClick(photo)}></PostItem>
+                <PostItem className="col-md-4 mb-4"key={post.id} post={post} handleUpdateClick={()=>props.handleUpdateClick(photo)}></PostItem>
             ))
         }
     </div>
