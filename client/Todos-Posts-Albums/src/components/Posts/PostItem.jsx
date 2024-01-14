@@ -1,14 +1,11 @@
 import React from 'react';
-import { useNavigate } from 'react-router-dom';
-
+import { FaEdit, FaTrashAlt } from 'react-icons/fa';;
 const PostItem = (props) => {
-  const navigate = useNavigate();
   const imagePaths = [
     "../../assets/images/banner1.jpg",
     "../../assets/images/banner2.jpg",
     "../../assets/images/banner3.jpg",
   ];
-  
   // Randomly select an image path
   const randomImagePath = imagePaths[Math.floor(Math.random() * imagePaths.length)];
 
@@ -18,7 +15,12 @@ const PostItem = (props) => {
       <div className="card-body">
         <p className="card-title">POST {props.post.id}</p>
         <p className="card-text">{props.post.title}</p>
-        <button onClick={props.handleUpdateClick}>update</button>
+        <button onClick={() => setIsEditing(true)} className="btn btn-sm btn-primary">
+          <FaEdit /> Edit
+        </button>
+        <button  className="btn btn-sm btn-danger me-2">
+          <FaTrashAlt /> Delete
+        </button>
         <button onClick={props.handleSelect}>Read more</button>
       </div>
     </div>

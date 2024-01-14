@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import useLocalStorage from '../hooks/useLocalStorage';
 import api from '../Api';
-import './form.css';
+import '../sass/form.scss'
 const Login = (props) => {
   const navigate = useNavigate();
   const [user, setUser] = useLocalStorage('user', null);

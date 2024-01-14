@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-
+import '../sass/form.scss'
 const Register = () => {
   const navigate = useNavigate();
   const [user, setUser] = useState({

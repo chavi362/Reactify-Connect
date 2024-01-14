@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { FaEdit, FaTrashAlt } from 'react-icons/fa';;
+import { FaEdit, FaTrashAlt } from 'react-icons/fa';
 
 const CommentItem = ({ email, name, body, isCommentCreator, handleDelete, handleConfirmUpdate }) => {
   const [isEditing, setIsEditing] = useState(false);

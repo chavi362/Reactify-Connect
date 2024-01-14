@@ -1,7 +1,6 @@
 import React from 'react'
-// import './Album.scss'
 import { Link } from "react-router-dom";
-
+import { FaEdit, FaTrashAlt } from 'react-icons/fa';
 const AlbumItem = (props) => {
     return (
         <div className="albumItem">

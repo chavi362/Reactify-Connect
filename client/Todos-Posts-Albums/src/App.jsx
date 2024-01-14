@@ -13,7 +13,6 @@ import CreateAccount from './pages/CreateAccount';
 import Layout from './components/Layout';
 import PhotosPage from './pages/Albums/PhotosPage';
 import PostsPage from './pages/PostsPage';
-import FullPost from './pages/FullPost';
 import './App.css'
 
 export const UserContext = createContext();
@@ -35,7 +34,6 @@ function App() {
               </Route>
               <Route path="posts" element={<Outlet />}>
                 <Route index element={<PostsPage />} />
-                <Route path=":postId/" element={<FullPost />} />
                 </Route>
               <Route path="todos" element={<Outlet />}>
                 {/* Nested routes for Todos */}
