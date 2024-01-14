@@ -3,7 +3,6 @@ import { useNavigate } from 'react-router-dom';
 
 const PostItem = (props) => {
   const navigate = useNavigate();
-  const viewFullPost = () => navigate(`/post/${props.id}`);
   const imagePaths = [
     "../../assets/images/banner1.jpg",
     "../../assets/images/banner2.jpg",
@@ -20,7 +19,7 @@ const PostItem = (props) => {
         <p className="card-title">POST {props.post.id}</p>
         <p className="card-text">{props.post.title}</p>
         <button onClick={props.handleUpdateClick}>update</button>
-        <button onClick={viewFullPost}>Read more</button>
+        <button onClick={props.handleSelect}>Read more</button>
       </div>
     </div>
   );

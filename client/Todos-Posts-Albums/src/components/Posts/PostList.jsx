@@ -1,15 +1,19 @@
-import React from 'react'
-import PostItem from './PostItem'
+import React from 'react';
+import PostItem from './PostItem';
+
 const PostList = (props) => {
   return (
     <div className='row'>
-        {
-            props.posts.map((post)=>
-            (
-                <PostItem className="col-md-4 mb-4"key={post.id} post={post} handleUpdateClick={()=>props.handleUpdateClick(photo)}></PostItem>
-            ))
-        }
+      {props.posts.map((post) => (
+        <PostItem
+          key={post.id}
+          post={post}
+          handleSelect={() => props.handleSelectPost(post)}
+          handleUpdateClick={() => props.handleUpdateClick(post)}
+        />
+      ))}
     </div>
-  )
+  );
 }
-export default PostList
+
+export default PostList;

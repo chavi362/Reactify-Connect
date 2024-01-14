@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { Spinner } from 'react-bootstrap';
 import PhotoList from '../../components/Photos/PhotoList';
-import PhotoFullSize from '../../components/Photos/PhotoFullSize';
 import Pagination from '../../components/Pagination/Pagination';
 import api from '../../Api';
 import { Modal, Button, Form } from 'react-bootstrap';
