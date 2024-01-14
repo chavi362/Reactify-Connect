@@ -18,7 +18,6 @@ const FullPost = (props) => {
                 </div>
                 <button onClick={toggleComments}>{!showComments ? "show" : "hide"} Comments</button>
             </div>
-
             {showComments && <CommentsSection postId={props.post.id} />}
         </div>
     );

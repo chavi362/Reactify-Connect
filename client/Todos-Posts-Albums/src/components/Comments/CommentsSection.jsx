@@ -1,10 +1,12 @@
-import React, { useState,useEffect } from 'react'
+import React, { useState, useEffect } from 'react'
 import { Spinner } from 'react-bootstrap';
 import useGetData from '../../hooks/useGetData'
-import CommentsList from './Comments';
+import CommentsList from './CommentsList';
+import api from '../../Api';
+
 const CommentsSection = (props) => {
-    const [comments, setComments] = useState(null);
-    const [data, error, loading] = useGetData(`comments?postId=${props.postId}`);
+    const [comments, setComments] = useState([]);
+    const [data, error, loading, setLoading] = useGetData(`comments?postId=${props.postId}`);
     useEffect(() => {
         if (error) {
             console.error('Error fetching comments:', error);
@@ -13,12 +15,60 @@ const CommentsSection = (props) => {
             console.log(comments);
         }
     }, [data, error, loading]);
-    return (
+    const addComment = async (commentContent) => {
+        try {
+            console.log(commentContent)
+            const newComment = { postId: props.postId, ...commentContent }
+            console.log(newComment)
+            setLoading(true);
+            const response = await api.post('/comments', newComment);
+            const addedComment = response.data;
+            console.log('Comment added successfully');
+            setComments((prevComments) => [...prevComments, addedComment]);
+        } catch (error) {
+            console.error('Error adding comment:', error);
+            console.log('Detailed error response:', error.response);
+        }
+        finally {
+            setLoading(false);
+        }
+    };
+
+    const deleteComment = async (commentIdToDelete) => {
+        try {
+            setLoading(true)
+            await api.delete(`/comments/${commentIdToDelete}`);
+            setComments((prevComments) => prevComments.filter((comment) => comment.id !== commentIdToDelete));
+            console.log(`Deleted comment with ID ${commentIdToDelete}`);
+        } catch (error) {
+            console.error('Error deleting comment:', error);
+        }
+        finally {
+            setLoading(false);
+        }
+    }
+    const updateComment = async (commentToUpdate) => {
+        try {
+          setLoading(true);
+          await api.put(`/comments/${commentToUpdate.id}`, commentToUpdate);
+          setComments((prevComments) =>
+            prevComments.map((comment) =>
+              comment.id === commentToUpdate.id ? { ...commentToUpdate } : comment
+            )
+          );
+          console.log(`Updated comment with ID ${commentToUpdate.id}`);
+        } catch (error) {
+          console.error('Error updating comment:', error);
+        } finally {
+          setLoading(false);
+        }
+      };
+       return (
         <div>
             {loading ? (
                 <Spinner />
             ) : (
-               <CommentsList comments={comments}></CommentsList>
+                <CommentsList comments={comments} deleteComment={deleteComment} addComment={addComment} updateComment={updateComment}></CommentsList>
             )}
         </div>
     )

@@ -42,7 +42,6 @@ const TodosPage = () => {
 	const deleteTodo = async (todoIdToDelete) => {
 		try {
 			setLoading(true)
-			debugger;
 			await api.delete(`/todos/${todoIdToDelete}`);
 			setTodos((prevTodos) => prevTodos.filter((todo) => todo.id !== todoIdToDelete));
 			console.log(`Deleted todo with ID ${todoIdToDelete}`);
