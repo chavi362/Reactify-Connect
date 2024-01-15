@@ -14,17 +14,28 @@ const PhotoItem = (props) => {
     setImageError(true);
   };
 
+  const handleImageFallback = (e) => {
+    e.target.src = '../../assets/images/image-url-not-found.png';
+  };
+
   return (
     <div className="card" style={{ width: '28rem', margin: '10px' }}>
-      {!imageLoaded && !imageError && <Spinner />} 
-      <img
-        className={`card-img-top ${imageLoaded ? 'loaded' : ''} ${imageError ? 'error' : ''}`}
-        src={props.thumbnailUrl}
-        alt="Card image cap"
-        onLoad={handleImageLoad}
-        onError={handleImageError}
-      />
-      {imageError && <p>Error loading image</p>} {/* Show error message if image fails to load */}
+      <div className="position-relative">
+        {!imageLoaded && !imageError && (
+          <Spinner className="position-absolute top-50 start-50 translate-middle" animation="border" />
+        )}
+        <img
+          className={`card-img-top ${imageLoaded ? 'loaded' : ''} ${imageError ? 'error' : ''}`}
+          src={props.thumbnailUrl}
+          alt="Card image cap"
+          onLoad={handleImageLoad}
+          onError={(e) => {
+            handleImageError();
+            handleImageFallback(e);
+          }}
+        />
+      </div>
+      {imageError && <p>Error loading image</p>}
       <div className="card-body">
         <p className="card-text">{props.title}</p>
         <button onClick={props.deletePhoto}>

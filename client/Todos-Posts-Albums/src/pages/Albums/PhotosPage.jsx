@@ -70,7 +70,7 @@ const PhotosPage = () => {
     const handleUpdatePhoto = async (updatedPhoto) => {//ask if it good naming
         try {
             setLoading(true);
-            const dbPhoto={...updatedPhoto,url:updatedPhoto.thumbnailUrl};
+            const dbPhoto={...updatedPhoto,albumId:albumId,url:updatedPhoto.thumbnailUrl};
             if (isAdding) {
                 await api.post('/photos', dbPhoto);
             } else {

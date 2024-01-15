@@ -25,29 +25,13 @@ const AppNavbar = () => {
             <NavDropdown.Item as={NavLink} to="/posts" activeclassname="active">
               All Posts
             </NavDropdown.Item>
-            <NavDropdown.Item as={NavLink} to="/create-post" activeclassname="active">
-              Create New Post
-            </NavDropdown.Item>
           </NavDropdown>
-          <NavDropdown title="Todos" id="basic-nav-dropdown">
-            <NavDropdown.Item as={NavLink} to="/todos" activeclassname="active">
+            <Nav.Link as={NavLink} to="/todos" activeclassname="active">
               All Todos
-            </NavDropdown.Item>
-            {/* <NavDropdown.Item as={NavLink} to="/create-post" activeclassname="active">
-              Create New Post
-            </NavDropdown.Item> */}
-          </NavDropdown>
-          <NavDropdown title="Albums" id="album-nav-dropdown">
-            <NavDropdown.Item as={NavLink} to="/albums" activeclassname="active">
+            </Nav.Link>
+            <Nav.Link as={NavLink} to="/albums" activeclassname="active">
               All Albums
-            </NavDropdown.Item>
-            <NavDropdown.Item as={NavLink} to="/photos" activeclassname="active">
-              Photos
-            </NavDropdown.Item>
-            <NavDropdown.Item as={NavLink} to="/delete-photo" activeclassname="active">
-              Delete Photo
-            </NavDropdown.Item>
-          </NavDropdown>
+            </Nav.Link>
           <Nav.Link as={NavLink} to="/logout" activeclassname="active">
             Logout
           </Nav.Link>
