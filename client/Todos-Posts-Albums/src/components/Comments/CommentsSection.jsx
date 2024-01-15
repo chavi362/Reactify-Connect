@@ -3,6 +3,7 @@ import { Spinner } from 'react-bootstrap';
 import useGetData from '../../hooks/useGetData'
 import CommentsList from './CommentsList';
 import api from '../../Api';
+import WithLoader from '../WithLoader';
 
 const CommentsSection = (props) => {
     const [comments, setComments] = useState([]);
@@ -63,13 +64,10 @@ const CommentsSection = (props) => {
           setLoading(false);
         }
       };
+      const CommentsListWithLoader=WithLoader(CommentsList)
        return (
         <div>
-            {loading ? (
-                <Spinner />
-            ) : (
-                <CommentsList comments={comments} deleteComment={deleteComment} addComment={addComment} updateComment={updateComment}></CommentsList>
-            )}
+                <CommentsListWithLoader loading={loading} comments={comments} deleteComment={deleteComment} addComment={addComment} updateComment={updateComment}></CommentsListWithLoader>
         </div>
     )
 }

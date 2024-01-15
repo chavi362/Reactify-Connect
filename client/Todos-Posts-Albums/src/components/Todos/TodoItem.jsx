@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { FaTrashAlt } from 'react-icons/fa';
+import { FaTrashAlt,FaEdit } from 'react-icons/fa';
 
 const TodoItem = ({ todo, deleteTodo, updateTodo }) => {
   const [isEditing, setEditing] = useState(false);
@@ -54,7 +54,7 @@ const TodoItem = ({ todo, deleteTodo, updateTodo }) => {
               <button onClick={deleteTodo}>
                 <FaTrashAlt />
               </button>
-              <button onClick={handleUpdateButton}>Update</button>
+              <button onClick={handleUpdateButton}><FaEdit/></button>
             </>
           )}
         </div>

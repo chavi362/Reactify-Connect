@@ -1,14 +1,11 @@
 import React, { useState } from 'react';
-// import { FaWindowClose } from 'react-icons/fa';
+import { Form, Button } from 'react-bootstrap';
 
-const UpdatePhotoForm = ({ photo,  onUpdate }) => {
+const UpdatePhotoForm = ({ photo, onUpdate }) => {
   const [updatedPhoto, setUpdatedPhoto] = useState({ ...photo });
-
   const handleUpdate = () => {
-    // Call the onUpdate function with the updated details
     onUpdate(updatedPhoto);
   };
-
   const handleChange = (event) => {
     const { name, value } = event.target;
     setUpdatedPhoto((prevPhoto) => ({
@@ -16,46 +13,31 @@ const UpdatePhotoForm = ({ photo,  onUpdate }) => {
       [name]: value,
     }));
   };
-
   return (
-    <div className="card">
-      <img
-        className="card-img-top"
-        src={updatedPhoto.thumbnailUrl || "./assets/images/404-status-code.png"}
-        alt="Thumbnail"
-        onError={(e) => {
-          e.target.src = "./assets/images/404-status-code.png"; // Fallback image URL
-        }}
-      />
-      <div className="card-body">
-        <form>
-          <label>Title:</label>
-          <input
-            type="text"
-            className="form-control"
-            value={updatedPhoto.title}
-            name="title"
-            onChange={handleChange}
-          />
+    <Form>
+      <Form.Group controlId="formTitle">
+        <Form.Label>Title:</Form.Label>
+        <Form.Control
+          type="text"
+          value={updatedPhoto.title}
+          name="title"
+          onChange={handleChange}
+        />
+      </Form.Group>
+      <Form.Group controlId="formThumbnailUrl">
+        <Form.Label>Thumbnail URL:</Form.Label>
+        <Form.Control
+          type="text"
+          value={updatedPhoto.thumbnailUrl}
+          name="thumbnailUrl"
+          onChange={handleChange}
+        />
+      </Form.Group>
 
-          <label>Thumbnail URL:</label>
-          <input
-            type="text"
-            className="form-control"
-            value={updatedPhoto.thumbnailUrl}
-            name="thumbnailUrl"
-            onChange={handleChange}
-          />
-
-          <button type="button" onClick={handleUpdate}>
-            Update
-          </button>
-          {/* <button type="button" onClick={onClose}>
-            <FaWindowClose />
-          </button> */}
-        </form>
-      </div>
-    </div>
+      <Button variant="primary" type="button" onClick={handleUpdate}>
+        Save the photo
+      </Button>
+    </Form>
   );
 };
 

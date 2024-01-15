@@ -73,7 +73,7 @@ const TodoList = (props) => {
                             <option value="uncompleted">Uncompleted</option>
                         </select>
                     </label>
-                    <label className="mb-2" for="search"></label>
+                    <label className="mb-2" htmlFor="search"></label>
                     Search:
                     <input
                         id="search"
@@ -84,7 +84,7 @@ const TodoList = (props) => {
                     />
                     <br></br><br></br>
                     <h4>order by:</h4>
-                    <label className="mb-2" for="orderSelect"></label>
+                    <label className="mb-2" htmlFor="orderSelect"></label>
                     <select
                         className="form-select"
                         onChange={(e) => setOrder(e.target.value)}

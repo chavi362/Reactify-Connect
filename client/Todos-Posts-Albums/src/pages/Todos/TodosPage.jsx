@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useContext } from 'react';
 import TodoList from '../../components/Todos/TodosList';
-import { Spinner } from 'react-bootstrap';
+import WithLoader from '../../components/WithLoader';
 import useGetData from '../../hooks/useGetData';
 import { UserContext } from '../../App';
 import api from "../../Api";
@@ -68,19 +68,13 @@ const TodosPage = () => {
 			setLoading(false);
 		}
 	};
+	const TodoListWithLoader=WithLoader(TodoList)
 	return (
 		<main>
 			<div>
 				<h1>This is what you have to do!</h1>
 			</div>
-			{loading ? (
-				<Spinner />
-			) : (
-				<>
-					<TodoList todos={todos} deleteTodo={deleteTodo} addTodo={addTodo} updateTodo={updateTodo}/>
-				</>
-
-			)}
+					<TodoListWithLoader loading={loading} todos={todos} deleteTodo={deleteTodo} addTodo={addTodo} updateTodo={updateTodo}/>
 		</main>
 	);
 };

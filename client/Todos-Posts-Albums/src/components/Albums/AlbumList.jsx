@@ -2,6 +2,8 @@ import React from 'react'
 import AlbumItem from './AlbumItem';
 const AlbumList = (props) => {
   return (
+    <div className='container'>
+    
     <div className='row'>
     {
       props.albums.map((album) => (
@@ -10,6 +12,7 @@ const AlbumList = (props) => {
         </div>
       ))
     }
+  </div>
   </div>
   )
 }

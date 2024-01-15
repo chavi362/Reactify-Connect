@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import './Post.scss';
 import { FaWindowClose } from 'react-icons/fa';
 import CommentsSection from '../Comments/CommentsSection';
 

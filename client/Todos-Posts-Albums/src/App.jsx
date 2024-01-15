@@ -35,10 +35,7 @@ function App() {
               <Route path="posts" element={<Outlet />}>
                 <Route index element={<PostsPage />} />
                 </Route>
-              <Route path="todos" element={<Outlet />}>
-                {/* Nested routes for Todos */}
-                <Route index element={<TodosPage/>} />
-              </Route>
+              <Route path="todos" element={<TodosPage />}/>
               <Route path="*" element={<Error />} />
             </Route>
           {/* </Route> */}

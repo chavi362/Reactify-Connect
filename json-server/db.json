@@ -62,18 +62,6 @@
     },
     {
       "userId": 2,
-      "id": 11,
-      "title": "et ea vero quia laudantium autem",
-      "body": "delectus reiciendis molestiae occaecati non minima eveniet qui voluptatibus\naccusamus in eum beatae sit\nvel qui neque voluptates ut commodi qui incidunt\nut animi commodi"
-    },
-    {
-      "userId": 2,
-      "id": 12,
-      "title": "in quibusdam tempore odit est dolorem",
-      "body": "itaque id aut magnam\npraesentium quia et ea odit et ea voluptas et\nsapiente quia nihil amet occaecati quia id voluptatem\nincidunt ea est distinctio odio"
-    },
-    {
-      "userId": 2,
       "id": 13,
       "title": "dolorum ut in voluptas mollitia et saepe quo animi",
       "body": "aut dicta possimus sint mollitia voluptas commodi quo doloremque\niste corrupti reiciendis voluptatem eius rerum\nsit cumque quod eligendi laborum minima\nperferendis recusandae assumenda consectetur porro architecto ipsum ipsam"
@@ -599,6 +587,12 @@
       "id": 100,
       "title": "at nam consequatur ea labore ea harum",
       "body": "cupiditate quo est a modi nesciunt soluta\nipsa voluptas error itaque dicta in\nautem qui minus magnam et distinctio eum\naccusamus ratione error aut"
+    },
+    {
+      "userId": 2,
+      "title": "going to see ",
+      "body": "This is my best friend",
+      "id": 101
     }
   ],
   "comments": [
@@ -951,76 +945,6 @@
       "name": "dolorum soluta quidem ex quae occaecati dicta aut doloribus",
       "email": "Kiana_Predovic@yasmin.io",
       "body": "eum accusamus aut delectus\narchitecto blanditiis quia sunt\nrerum harum sit quos quia aspernatur vel corrupti inventore\nanimi dicta vel corporis"
-    },
-    {
-      "postId": 11,
-      "id": 51,
-      "name": "molestias et odio ut commodi omnis ex",
-      "email": "Laurie@lincoln.us",
-      "body": "perferendis omnis esse\nvoluptate sit mollitia sed perferendis\nnemo nostrum qui\nvel quis nisi doloribus animi odio id quas"
-    },
-    {
-      "postId": 11,
-      "id": 52,
-      "name": "esse autem dolorum",
-      "email": "Abigail.OConnell@june.org",
-      "body": "et enim voluptatem totam laudantium\nimpedit nam labore repellendus enim earum aut\nconsectetur mollitia fugit qui repellat expedita sunt\naut fugiat vel illo quos aspernatur ducimus"
-    },
-    {
-      "postId": 11,
-      "id": 53,
-      "name": "maiores alias necessitatibus aut non",
-      "email": "Laverne_Price@scotty.info",
-      "body": "a at tempore\nmolestiae odit qui dolores molestias dolorem et\nlaboriosam repudiandae placeat quisquam\nautem aperiam consectetur maiores laboriosam nostrum"
-    },
-    {
-      "postId": 11,
-      "id": 54,
-      "name": "culpa eius tempora sit consequatur neque iure deserunt",
-      "email": "Kenton_Vandervort@friedrich.com",
-      "body": "et ipsa rem ullam cum pariatur similique quia\ncum ipsam est sed aut inventore\nprovident sequi commodi enim inventore assumenda aut aut\ntempora possimus soluta quia consequatur modi illo"
-    },
-    {
-      "postId": 11,
-      "id": 55,
-      "name": "quas pariatur quia a doloribus",
-      "email": "Hayden_Olson@marianna.me",
-      "body": "perferendis eaque labore laudantium ut molestiae soluta et\nvero odio non corrupti error pariatur consectetur et\nenim nam quia voluptatum non\nmollitia culpa facere voluptas suscipit veniam"
-    },
-    {
-      "postId": 12,
-      "id": 56,
-      "name": "et dolorem corrupti sed molestias",
-      "email": "Vince_Crist@heidi.biz",
-      "body": "cum esse odio nihil reiciendis illum quaerat\nest facere quia\noccaecati sit totam fugiat in beatae\nut occaecati unde vitae nihil quidem consequatur"
-    },
-    {
-      "postId": 12,
-      "id": 57,
-      "name": "qui quidem sed",
-      "email": "Darron.Nikolaus@eulah.me",
-      "body": "dolorem facere itaque fuga odit autem\nperferendis quisquam quis corrupti eius dicta\nrepudiandae error esse itaque aut\ncorrupti sint consequatur aliquid"
-    },
-    {
-      "postId": 12,
-      "id": 58,
-      "name": "sint minus reiciendis qui perspiciatis id",
-      "email": "Ezra_Abshire@lyda.us",
-      "body": "veritatis qui nihil\nquia reprehenderit non ullam ea iusto\nconsectetur nam voluptas ut temporibus tempore provident error\neos et nisi et voluptate"
-    },
-    {
-      "postId": 12,
-      "id": 59,
-      "name": "quis ducimus distinctio similique et illum minima ab libero",
-      "email": "Jameson@tony.info",
-      "body": "cumque molestiae officia aut fugiat nemo autem\nvero alias atque sed qui ratione quia\nrepellat vel earum\nea laudantium mollitia"
-    },
-    {
-      "postId": 12,
-      "id": 60,
-      "name": "expedita libero quos cum commodi ad",
-      "email": "Americo@estrella.net",
-      "body": "error eum quia voluptates alias repudiandae\naccusantium veritatis maiores assumenda\nquod impedit animi tempore veritatis\nanimi et et officiis labore impedit blanditiis repudiandae"
     },
     {
       "postId": 13,
@@ -2125,7 +2049,7 @@
       "postId": 44,
       "id": 218,
       "name": "voluptatem qui deserunt dolorum in voluptates similique et qui",
-      "email": "Ettie_Bashirian@lambert.biz",
+      "email": "Ettie_Baian@lambert.biz",
       "body": "rem qui est\nfacilis qui voluptatem quis est veniam quam aspernatur dicta\ndolore id sapiente saepe consequatur\nenim qui impedit culpa ex qui voluptas dolor"
     },
     {
@@ -4103,37 +4027,6 @@
       "body": "perspiciatis quis doloremque\nveniam nisi eos velit sed\nid totam inventore voluptatem laborum et eveniet\naut aut aut maxime quia temporibus ut omnis"
     },
     {
-      "title": "Chavi",
-      "body": "this is an hkl",
-      "postId": 11,
-      "id": 501
-    },
-    {
-      "title": "Shirli",
-      "body": "This is an awesom",
-      "postId": 11,
-      "id": 502
-    },
-    {
-      "title": "ChddgfTh",
-      "body": "This is what i like to do",
-      "postId": 11,
-      "id": 503
-    },
-    {
-      "postId": 11,
-      "name": "Chavi",
-      "body": "I like you so much",
-      "id": 504
-    },
-    {
-      "postId": 12,
-      "name": "Shirel ",
-      "body": "This is an awesom....",
-      "email": "Shanna@melissa.tv",
-      "id": 505
-    },
-    {
       "postId": 15,
       "name": "Tommarow we have math",
       "body": "קריארינ ע",
@@ -4141,18 +4034,11 @@
       "id": 506
     },
     {
-      "postId": 11,
-      "name": "",
-      "body": "tday issssssssssssssssssssssssssssssssss",
+      "postId": 101,
+      "name": "Chavi",
+      "body": "trhnt",
       "email": "Shanna@melissa.tv",
       "id": 507
-    },
-    {
-      "postId": 11,
-      "name": "fbfd",
-      "body": "note that i'm her",
-      "email": "Shanna@melissa.tv",
-      "id": 508
     }
   ],
   "albums": [
@@ -8112,30 +7998,16 @@
     {
       "albumId": 11,
       "id": 501,
-      "title": "asperiores exercitationem voluptates qui amet quae necessitatibus facere",
+      "title": "m voluptates qui amet quae necessitatibus facere",
       "url": "https://via.placeholder.com/600/cda4c0",
       "thumbnailUrl": "https://via.placeholder.com/150/cda4c0"
     },
     {
       "albumId": 11,
       "id": 502,
-      "title": "omnis qui sit et",
+      "title": "trgfgfhg",
       "url": "https://via.placeholder.com/600/74e371",
       "thumbnailUrl": "https://via.placeholder.com/150/74e371"
-    },
-    {
-      "albumId": 11,
-      "id": 503,
-      "title": "modi voluptas fugiat eos",
-      "url": "https://via.placeholder.com/600/9022fb",
-      "thumbnailUrl": "https://via.placeholder.com/150/9022fb"
-    },
-    {
-      "albumId": 11,
-      "id": 504,
-      "title": "sapiente id vel dignissimos",
-      "url": "https://via.placeholder.com/600/99dd3f",
-      "thumbnailUrl": "https://via.placeholder.com/150/99dd3f"
     },
     {
       "albumId": 11,
@@ -8161,7 +8033,7 @@
     {
       "albumId": 11,
       "id": 508,
-      "title": "et officiis maxime consequatur magnam",
+      "title": "tehila",
       "url": "https://via.placeholder.com/600/c4e0b1",
       "thumbnailUrl": "https://via.placeholder.com/150/c4e0b1"
     },
@@ -8280,7 +8152,7 @@
     {
       "albumId": 11,
       "id": 525,
-      "title": "maiores nostrum nam consequatur illo ipsam",
+      "title": "Chavi worls",
       "url": "https://via.placeholder.com/600/7bccd9",
       "thumbnailUrl": "https://via.placeholder.com/150/7bccd9"
     },
@@ -8289,7 +8161,7 @@
       "id": 526,
       "title": "ullam eum molestias facere",
       "url": "https://via.placeholder.com/600/e2374f",
-      "thumbnailUrl": "https://via.placeholder.com/150/e2374f"
+      "thumbnailUrl": "https://via.placeholder.com/150"
     },
     {
       "albumId": 11,
@@ -39608,6 +39480,22 @@
       "title": "error quasi sunt cupiditate voluptate ea odit beatae",
       "url": "https://via.placeholder.com/600/6dd9cb",
       "thumbnailUrl": "https://via.placeholder.com/150/6dd9cb"
+    },
+    {
+      "title": "Shirly",
+      "thumbnailUrl": "https://via.placeholder.com/150/d327",
+      "id": 5001
+    },
+    {
+      "title": "sfgd",
+      "thumbnailUrl": "https://via.placeholder.com/150/d327",
+      "id": 5002
+    },
+    {
+      "title": "fjg",
+      "thumbnailUrl": "https://via.placeholder.com/150/d327",
+      "url": "https://via.placeholder.com/150/d327",
+      "id": 5003
     }
   ],
   "users": [
@@ -39845,14 +39733,8 @@
   "todos": [
     {
       "userId": 2,
-      "id": 24,
-      "title": "chavi",
-      "completed": false
-    },
-    {
-      "userId": 2,
       "id": 26,
-      "title": "aliquam aut quasi",
+      "title": "aliquam aut quasidgthr",
       "completed": true
     },
     {

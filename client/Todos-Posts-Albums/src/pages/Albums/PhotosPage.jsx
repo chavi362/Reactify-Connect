@@ -1,16 +1,18 @@
+
 import React, { useState, useEffect } from 'react';
-import { Link, useLocation } from 'react-router-dom';
-import { Spinner } from 'react-bootstrap';
-import PhotoList from '../../components/Photos/PhotoList';
+import { useLocation } from 'react-router-dom';
+import PhotosList from '../../components/Photos/PhotosList';
 import Pagination from '../../components/Pagination/Pagination';
 import api from '../../Api';
-import { Modal } from 'react-bootstrap';
+import { Modal, Button } from 'react-bootstrap';
+import WithLoader from '../../components/WithLoader';
 import UpdatePhotoForm from '../../components/Photos/UpdatePhotoForm';
+import { FaPlusSquare } from 'react-icons/fa';
 
 const PhotosPage = () => {
     const [showUpdateModal, setShowUpdateModal] = useState(false);
     const [selectedPhotoForUpdate, setSelectedPhotoForUpdate] = useState(null);
-    const location = useLocation();//ask vesily if it's correct way to sent thing from page to page
+    const location = useLocation();
     const queryParams = new URLSearchParams(location.search);
     const albumId = queryParams.get('albumId');
     const perPage = 12;
@@ -19,7 +21,8 @@ const PhotosPage = () => {
     const [prevPage, setPrevPage] = useState(false);
     const [nextPage, setNextPage] = useState(false);
     const [loading, setLoading] = useState(true);
-    
+    const [isAdding, setIsAdding] = useState(false);
+
     const fetchData = async () => {
         try {
             const response = await api.get(`photos?albumId=${albumId}&_page=${page}&_limit=${perPage}`);
@@ -31,47 +34,55 @@ const PhotosPage = () => {
             setLoading(false);
         }
     };
+
     useEffect(() => {
         fetchData();
     }, [albumId, page, perPage]);
+
     const deletePhoto = async (photoIdToDelete) => {
         try {
-            setLoading(true)
-            debugger;
+            setLoading(true);
             await api.delete(`/photos/${photoIdToDelete}`);
-            setPhotos((prevTodos) => prevTodos.filter((todo) => todo.id !== photoIdToDelete));
+            setPhotos((prevPhotos) => prevPhotos.filter((photo) => photo.id !== photoIdToDelete));
             console.log(`Deleted photo with ID ${photoIdToDelete}`);
         } catch (error) {
             console.error('Error deleting photo:', error);
-        }
-        finally {
+        } finally {
             setLoading(false);
         }
     };
+
     const handleCloseUpdateModal = () => {
         setShowUpdateModal(false);
+        setSelectedPhotoForUpdate(null);
+        setIsAdding(false);
     };
-    const handleOpenUpdateModal = (photoForUpdate) => {
-        setSelectedPhotoForUpdate(photoForUpdate)
-        setShowUpdateModal(true);
 
-    }
-    const handleUpdatePhoto = async (updatedPhoto) => {
-        console.log('Updated Photo:', updatedPhoto);
+    const handleOpenUpdateModal = (photoForUpdate) => {
+        setSelectedPhotoForUpdate(photoForUpdate);
+        setShowUpdateModal(true);
+    };
+
+    const handleOpenAddPhoto = () => {
+        setIsAdding(true);
+        setShowUpdateModal(true);
+    };
+    const handleUpdatePhoto = async (updatedPhoto) => {//ask if it good naming
         try {
             setLoading(true);
-            await api.put(`photos/${updatedPhoto.id}`, updatedPhoto);
-            setPhotos((prevPhotos) =>
-                prevPhotos.map((photo) =>
-                    photo.id === updatedPhoto.id ? { ...updatedPhoto } : photo
-                )
-            );
-            console.log(`Updated photo with ID ${updatedPhoto.id}`);
+            const dbPhoto={...updatedPhoto,url:updatedPhoto.thumbnailUrl};
+            if (isAdding) {
+                await api.post('/photos', dbPhoto);
+            } else {
+                await api.put(`photos/${dbPhoto.id}`,dbPhoto);
+            }
+            fetchData();
+            console.log(`successfullyphoto with ID ${dbPhoto.id}`);
         } catch (error) {
             console.error('Error updating photo:', error);
         } finally {
             setLoading(false);
-            handleCloseUpdateModal(); // Close the modal after updating
+            handleCloseUpdateModal(); // Close the modal after updating or adding
         }
     };
 
@@ -106,33 +117,35 @@ const PhotosPage = () => {
         setPage(page - 1);
     };
 
+    const PhotosListWithLoader = WithLoader(PhotosList);
+    const PaginationWithLoader = WithLoader(Pagination);
+
     return (
         <main>
             <div className="titleBar">
                 <h1 className="heading1">Album: {albumId}</h1>
-                <Link className="closeBtn" to='/'>Close X</Link>
+                <button onClick={handleOpenAddPhoto}>
+                    <FaPlusSquare /> Add new image
+                </button>
             </div>
-            {loading ? (
-                <Spinner animation="border" role="status">
-                    <span className="sr-only">Loading...</span>
-                </Spinner>
-            ) : (
-                <div className="photosPage">
-                    <PhotoList photos={photos} handleUpdateClick={handleOpenUpdateModal} photoClick={displayFullSize} deletePhoto={deletePhoto} />
-                    <Pagination isNext={nextPage} isPrev={prevPage} current={page} nextPage={loadNextPage} prevPage={loadPrevPage} />
-                    <Modal show={showUpdateModal} onHide={handleCloseUpdateModal}>
-                        <Modal.Header closeButton>
-                            <Modal.Title>Update Photo</Modal.Title>
-                        </Modal.Header>
-                        <Modal.Body>
-                            {selectedPhotoForUpdate && (
-                                <UpdatePhotoForm photo={selectedPhotoForUpdate} onUpdate={handleUpdatePhoto} />
-                            )}
-                        </Modal.Body>
-                    </Modal>
-                </div>
-            )}
-
+            <div className="photosPage">
+                <PhotosListWithLoader loading={loading} photos={photos} handleUpdateClick={handleOpenUpdateModal} deletePhoto={deletePhoto} />
+                <PaginationWithLoader loading={loading} isNext={nextPage} isPrev={prevPage} current={page} nextPage={loadNextPage} prevPage={loadPrevPage} />
+                <Modal show={showUpdateModal} onHide={handleCloseUpdateModal}>
+                    <Modal.Header closeButton>
+                        <Modal.Title>{isAdding ? 'Add New Photo' : 'Update Photo'}</Modal.Title>
+                    </Modal.Header>
+                    <Modal.Body>
+                        {(isAdding || (selectedPhotoForUpdate) )&& (
+                            <UpdatePhotoForm
+                                photo={isAdding ? { title: "", thumbnailUrl: "" } : selectedPhotoForUpdate}
+                                onUpdate={handleUpdatePhoto}
+                                onClose={handleCloseUpdateModal}
+                            />
+                        )}
+                    </Modal.Body>
+                </Modal>
+            </div>
         </main>
     );
 };
