@@ -27,10 +27,10 @@ const AppNavbar = () => {
             </NavDropdown.Item>
           </NavDropdown>
             <Nav.Link as={NavLink} to="/todos" activeclassname="active">
-              All Todos
+               Todos
             </Nav.Link>
             <Nav.Link as={NavLink} to="/albums" activeclassname="active">
-              All Albums
+             Albums
             </Nav.Link>
           <Nav.Link as={NavLink} to="/logout" activeclassname="active">
             Logout
