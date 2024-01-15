@@ -8,7 +8,7 @@ import { Modal, Button } from 'react-bootstrap';
 import WithLoader from '../../components/WithLoader';
 import UpdatePhotoForm from '../../components/Photos/UpdatePhotoForm';
 import { FaPlusSquare } from 'react-icons/fa';
-
+import useGetPaginationData from '../../hooks/useGetPaginationData';
 const PhotosPage = () => {
     const [showUpdateModal, setShowUpdateModal] = useState(false);
     const [selectedPhotoForUpdate, setSelectedPhotoForUpdate] = useState(null);
@@ -18,27 +18,15 @@ const PhotosPage = () => {
     const perPage = 12;
     const [page, setPage] = useState(1);
     const [photos, setPhotos] = useState([]);
-    const [prevPage, setPrevPage] = useState(false);
-    const [nextPage, setNextPage] = useState(false);
-    const [loading, setLoading] = useState(true);
     const [isAdding, setIsAdding] = useState(false);
-
-    const fetchData = async () => {
-        try {
-            const response = await api.get(`photos?albumId=${albumId}&_page=${page}&_limit=${perPage}`);
-            setPhotos(response.data);
-            pagination(response.headers.link);
-        } catch (error) {
-            console.error(error);
-        } finally {
-            setLoading(false);
-        }
-    };
-
+    const [data, error, loading, setLoading, prevPage, setPrevPage, nextPage, setNextPage] = useGetPaginationData(`photos?albumId=${albumId}&_page=${page}&_limit=${perPage}`);
     useEffect(() => {
-        fetchData();
-    }, [albumId, page, perPage]);
-
+        if (error) {
+            console.error('Error fetching photos:', error);
+        } else if (data) {
+            setPhotos(data);
+        }
+    }, [data, error, loading]);
     const deletePhoto = async (photoIdToDelete) => {
         try {
             setLoading(true);
@@ -70,11 +58,11 @@ const PhotosPage = () => {
     const handleUpdatePhoto = async (updatedPhoto) => {//ask if it good naming
         try {
             setLoading(true);
-            const dbPhoto={...updatedPhoto,albumId:albumId,url:updatedPhoto.thumbnailUrl};
+            const dbPhoto = { ...updatedPhoto, albumId: albumId, url: updatedPhoto.thumbnailUrl };
             if (isAdding) {
                 await api.post('/photos', dbPhoto);
             } else {
-                await api.put(`photos/${dbPhoto.id}`,dbPhoto);
+                await api.put(`photos/${dbPhoto.id}`, dbPhoto);
             }
             fetchData();
             console.log(`successfullyphoto with ID ${dbPhoto.id}`);
@@ -85,30 +73,6 @@ const PhotosPage = () => {
             handleCloseUpdateModal(); // Close the modal after updating or adding
         }
     };
-
-    const pagination = (headers) => {
-        const links = headers.split(',');
-
-        // State representation of pages availability
-        const pages = { nextPage: false, prevPage: false };
-        links.forEach((link) => {
-            const temp = link.split(';');
-            // Switching on link.rel
-            switch (temp[1].replace(/\s/g, '')) {
-                case 'rel="next"':
-                    pages.nextPage = true;
-                    break;
-                case 'rel="prev"':
-                    pages.prevPage = true;
-                    break;
-                default:
-                    break;
-            }
-        });
-        setNextPage(pages.nextPage);
-        setPrevPage(pages.prevPage);
-    };
-
     const loadNextPage = () => {
         setPage(page + 1);
     };
@@ -119,7 +83,6 @@ const PhotosPage = () => {
 
     const PhotosListWithLoader = WithLoader(PhotosList);
     const PaginationWithLoader = WithLoader(Pagination);
-
     return (
         <main>
             <div className="titleBar">
@@ -136,7 +99,7 @@ const PhotosPage = () => {
                         <Modal.Title>{isAdding ? 'Add New Photo' : 'Update Photo'}</Modal.Title>
                     </Modal.Header>
                     <Modal.Body>
-                        {(isAdding || (selectedPhotoForUpdate) )&& (
+                        {(isAdding || (selectedPhotoForUpdate)) && (
                             <UpdatePhotoForm
                                 photo={isAdding ? { title: "", thumbnailUrl: "" } : selectedPhotoForUpdate}
                                 onUpdate={handleUpdatePhoto}

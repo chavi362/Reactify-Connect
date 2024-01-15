@@ -13,6 +13,7 @@ import CreateAccount from './pages/CreateAccount';
 import Layout from './components/Layout';
 import PhotosPage from './pages/Albums/PhotosPage';
 import PostsPage from './pages/PostsPage';
+import AllPost from './pages/AllPost';
 import './App.css'
 
 export const UserContext = createContext();
@@ -26,6 +27,7 @@ function App() {
             <Route index element={<Home />} />
             <Route path="/login" setUser={setUser} element={<Login updateUserContext={setUser} />} />
             <Route path="/register" element={<Register />} />
+            <Route path="/all-posts" element={<AllPost />} />
             <Route path="/create-account" element={<CreateAccount />} />
             {/* <Route path="/users/:userId" element={<Info />}> */}
               <Route path="albums" element={<Outlet />}>
