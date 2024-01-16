@@ -2,13 +2,12 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import '../sass/form.scss'
 import api from '../Api';
-const Register = () => {
+const Register = ({ updateUserContext }) => {
   const navigate = useNavigate();
   const [user, setUser] = useState({
     email: '',
     password: '',
   });
-
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
@@ -21,8 +20,8 @@ const Register = () => {
           alert('Password must be at least 8 characters long and contain at least one uppercase letter, one lowercase letter, and one digit.');
           return;
         }
-        const response =await api.post('users', { email: user.email, website: user.password });
-      
+        const registerResponse  = await api.post('users', { email: user.email, website: user.password });
+        updateUserContext(registerResponse.data);
         navigate(`/create-account`);
       }
     } catch (error) {
@@ -36,7 +35,6 @@ const Register = () => {
       [name]: value,
     }));
   };
-  
   const isStrongPassword = (password) => {
     const passwordRegex = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}$/;
     return passwordRegex.test(password);

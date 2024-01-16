@@ -31,8 +31,8 @@ function App() {
             <Route path="/login" element={<Login updateUserContext={setUser} />} />
             <Route path="/register" element={<Register updateUserContext={setUser} />} />
             <Route path="/create-account" element={<CreateAccount updateUserContext={setUser} />} />
+            <Route path="home" index element={<Home />} />
             <Route path="users/:userId/"  >
-              <Route path="home" index element={<Home />} />
               <Route path="info" element={<Info />} />
               <Route path="albums" element={<AlbumsPage />} />
               <Route path="albums/:albumid/photos" element={<PhotosPage />} />

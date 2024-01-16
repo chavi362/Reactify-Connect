@@ -5,15 +5,12 @@ import { Spinner } from 'react-bootstrap';
 const PhotoItem = (props) => {
   const [imageLoaded, setImageLoaded] = useState(false);
   const [imageError, setImageError] = useState(false);
-
   const handleImageLoad = () => {
     setImageLoaded(true);
   };
-
   const handleImageError = () => {
     setImageError(true);
   };
-
   const handleImageFallback = (e) => {
     e.target.src = '../../assets/images/image-url-not-found.png';
   };
@@ -22,7 +19,7 @@ const PhotoItem = (props) => {
     <div className="card" >
       <div className="position-relative">
         {!imageLoaded && !imageError && (
-          <Spinner className="position-absolute top-50 start-50 translate-middle">loading</Spinner>
+          <Spinner className="position-absolute top-50 start-50 translate-middle"></Spinner>
         )}
         <img
           className={`card-img-top ${imageLoaded ? 'loaded' : ''} ${imageError ? 'error' : ''}`}

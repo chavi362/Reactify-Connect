@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import '../sass/form.scss'
-
+import api from '../Api';
 const CreateAccount = () => {
   const navigate = useNavigate();
   const { email, password } = useParams();
@@ -20,7 +20,7 @@ const CreateAccount = () => {
     website: "",
     companyName: "",
     catchPhrase: "",
-    bs: ""
+    
   });
   useEffect(() => {
     console.log('Current URL:', window.location.href);
@@ -34,6 +34,7 @@ const CreateAccount = () => {
   }, [email, password]);
   const handleSubmit = (e) => {
     e.preventDefault();
+
     navigate('/home');
   };
   const handleChange = (event) => {
@@ -43,7 +44,7 @@ const CreateAccount = () => {
       [name]: value,
     }));
   };
-  
+
   return (
     <section className="h-100 gradient-form" style={{ backgroundColor: '#eee' }}>
       <div className="container py-5 h-100">
@@ -88,32 +89,41 @@ const CreateAccount = () => {
                           onChange={handleChange}
                           name="address"
                         />
-                        <label className="form-label" htmlFor="form2Example44">
+                        <label className="form-label">
                           Address
                         </label>
                       </div>
                       <div className="form-outline mb-4">
-                        <input
-                          id="form2Example55"
-                          className="form-control"
-                          placeholder="Your phone number"
-                          value={formUser.phone}
-                          onChange={handleChange}
-                          name="phone"
-                        />
-                        <label className="form-label" htmlFor="form2Example55">
-                          Phone Number
-                        </label>
-                      </div>
-                      <div className="form-outline mb-4">
-                        <input
-                          id="form2Example66"
-                          className="form-control"
-                          placeholder="Your company name"
-                          value={formUser.companyName}
-                          onChange={handleChange}
-                          name="companyName"
-                        />
+                        <div className="d-flex">
+                          <input
+                            className="form-control me-2"
+                            placeholder="Street"
+                            value={formUser.street}
+                            onChange={handleChange}
+                            name="street"
+                          />
+                          <input
+                            className="form-control me-2"
+                            placeholder="Suite"
+                            value={formUser.suite}
+                            onChange={handleChange}
+                            name="suite"
+                          />
+                          <input
+                            className="form-control"
+                            placeholder="City"
+                            value={formUser.city}
+                            onChange={handleChange}
+                            name="city"
+                          />
+                           <input
+                            className="form-control"
+                            placeholder="zip code"
+                            value={formUser.zipcode}
+                            onChange={handleChange}
+                            name="zipcode"
+                          />
+                        </div>
                         <label className="form-label" htmlFor="form2Example66">
                           Company Name
                         </label>
@@ -128,12 +138,14 @@ const CreateAccount = () => {
                           name="catchPhrase"
                         />
                         <label className="form-label" htmlFor="form2Example77">
-                          catch phrase
+                          company catch phrase
                         </label>
+                        <br/><br/>
                         <button
                           className="btn btn-primary btn-block fa-lg gradient-custom-2 mb-3"
                           type="submit"
                         >
+                  
                           Create Account
                         </button>
                       </div>

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import Pagination from '../components/Pagination/Pagination';
+import Pagination from '../components/Pagination';
 import useGetPaginationData from '../hooks/useGetPaginationData';
 import WithLoader from '../components/WithLoader';
 import PostList from '../components/Posts/PostList';
@@ -24,7 +24,7 @@ const AllPost = () => {
     setPage(page - 1);
   };
   const PaginationWithLoader = WithLoader(Pagination);
-  const PostListWithLoader=WithLoader(PostList);
+  const PostListWithLoader = WithLoader(PostList);
   return (
     <div>
       <PostListWithLoader loading={loading} posts={posts} />

@@ -2,7 +2,7 @@
 import React, { useState, useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 import PhotosList from '../../components/Photos/PhotosList';
-import Pagination from '../../components/Pagination/Pagination';
+import Pagination from '../../components/Pagination';
 import api from '../../Api';
 import { Modal, Button } from 'react-bootstrap';
 import WithLoader from '../../components/WithLoader';
@@ -66,9 +66,9 @@ const PhotosPage = () => {
             }
             console.log(`successfullyphoto with ID ${dbPhoto.id}`);
             setPhotos((prevPhotos) =>
-            prevPhotos.map((photo) =>
-            photo.id === dbPhoto.id ? { ...dbPhoto } : photo
-            ));
+                prevPhotos.map((photo) =>
+                    photo.id === dbPhoto.id ? { ...dbPhoto } : photo
+                ));
         } catch (error) {
             console.error('Error updating photo:', error);
         } finally {

@@ -1,5 +1,5 @@
 import React from 'react'
-import './Pagination.scss'
+import '../sass/pagination.scss'
 const Pagination = (props) => {
   return (
     <div>

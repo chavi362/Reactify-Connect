@@ -1,13 +1,9 @@
 @import './variables.scss';
-// $color-primary: #007bff;
-// $secondary-color: #6c757d;
 
-// Styles
 body {
   margin-top: 20px;
   color: #1a202c;
   text-align: left;
-//   background-color: #f0e2e9;
 }
 
 .container {
@@ -20,8 +16,8 @@ body {
 }
 
 .breadcrumb {
-  background-color: #fff;
-  border: 1px solid #ddd;
+  background-color: $color-white;
+  border: 1px solid $color-white-2;
   border-radius: 0.25rem;
   padding: 0.75rem 1rem;
   margin-bottom: 1rem;

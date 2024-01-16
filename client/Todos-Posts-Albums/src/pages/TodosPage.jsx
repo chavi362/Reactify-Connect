@@ -3,7 +3,7 @@ import TodoList from '../components/Todos/TodosList';
 import WithLoader from '../components/WithLoader';
 import useGetData from '../hooks/useGetData';
 import { UserContext } from '../App';
-import { getAllData, addItem, deleteItem, updatePost } from "../Api";
+import api ,{addItem} from '../Api';
 
 const TodosPage = () => {
 	const user = useContext(UserContext);

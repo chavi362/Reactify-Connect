@@ -30,7 +30,7 @@ const AppNavbar = ({ deleteUser }) => {
           alt="logo"
         />
       </div>
-      <Navbar.Brand as={NavLink} to={`/users/${userId}/home`} activeClassName="active">
+      <Navbar.Brand as={NavLink} to={`/home`} activeClassName="active">
         Home
       </Navbar.Brand>
       <Navbar.Toggle aria-controls="navbar" />

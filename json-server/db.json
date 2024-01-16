@@ -535,12 +535,6 @@
       "body": "cupiditate quo est a modi nesciunt soluta\nipsa voluptas error itaque dicta in\nautem qui minus magnam et distinctio eum\naccusamus ratione error aut"
     },
     {
-      "userId": 2,
-      "title": "going to see ",
-      "body": "This is my best friend",
-      "id": 101
-    },
-    {
       "userId": 6,
       "title": "I love ai",
       "body": "MIn max algorihmmmmmmmmmmmmmmm",
@@ -551,6 +545,18 @@
       "title": "ayal hjgjkgu",
       "body": "truj ikm vtyk",
       "id": 103
+    },
+    {
+      "userId": 1,
+      "title": "reghtrh",
+      "body": "thebrjyxdku",
+      "id": 104
+    },
+    {
+      "userId": 1,
+      "title": "46u7",
+      "body": "6uj57i8o9p0",
+      "id": 105
     }
   ],
   "comments": [
@@ -3677,13 +3683,6 @@
       "id": 506
     },
     {
-      "postId": 101,
-      "name": "Chavi",
-      "body": "trhnt",
-      "email": "Shanna@melissa.tv",
-      "id": 507
-    },
-    {
       "postId": 103,
       "name": "6rtir67i9",
       "body": "rt5furf6tdi",
@@ -4531,11 +4530,11 @@
       "thumbnailUrl": "https://via.placeholder.com/150/95acce"
     },
     {
-      "albumId": 2,
+      "albumId": "2",
       "id": 58,
       "title": "rem pariatur facere eaque",
-      "url": "https://via.placeholder.com/600/cde4c1",
-      "thumbnailUrl": "https://via.placeholder.com/150/cde4c1"
+      "url": "https://via.placeholder.com/150/cd",
+      "thumbnailUrl": "https://via.placeholder.com/150/cd"
     },
     {
       "albumId": 2,
@@ -4561,7 +4560,7 @@
     {
       "albumId": "2",
       "id": 62,
-      "title": "freyhrt",
+      "title": "freyhr sdds",
       "url": "https://via.placeholder.com/150/65ad4f",
       "thumbnailUrl": "https://via.placeholder.com/150/65ad4f"
     },
@@ -39334,6 +39333,11 @@
         "catchPhrase": "Centralized empowering task-force",
         "bs": "target end-to-end models"
       }
+    },
+    {
+      "email": "chavi@gmail.com",
+      "website": "Chavi2804",
+      "id": 11
     }
   ],
   "todos": [
@@ -40440,6 +40444,12 @@
       "title": "gf",
       "completed": false,
       "id": 220
+    },
+    {
+      "userId": 2,
+      "title": "rw",
+      "completed": false,
+      "id": 221
     }
   ]
 }

@@ -1,5 +1,4 @@
 import React, { useState, useEffect, useContext } from 'react';
-import { useNavigate } from 'react-router-dom';
 import { Modal, Button, Form } from 'react-bootstrap';
 import useGetData from '../hooks/useGetData';
 import { UserContext } from '../App';
@@ -9,8 +8,8 @@ import api from '../Api';
 import WithLoader from '../components/WithLoader';
 import { FaPlusSquare } from 'react-icons/fa';
 import AddNewPost from '../components/Posts/AddNewPost';
+import withSearch from '../components/WithSearch';
 const PostsPage = () => {
-  const navigate = useNavigate();
   const user = useContext(UserContext);
   const [showUpdateModal, setShowUpdateModal] = useState(false);
   const [updatedPost, setUpdatedPost] = useState({ userId: '', id: '', title: '', body: '' });
@@ -20,6 +19,7 @@ const PostsPage = () => {
   const [data, error, loading, setLoading] = useGetData(`posts?userId=${user.id}`);
   const [showAddPost, setShowAddPost] = useState(false);
   useEffect(() => {
+    console.log(loading)
     if (error) {
       console.error('Error fetching posts:', error);
     } else if (data) {
@@ -91,7 +91,8 @@ const PostsPage = () => {
   function closeAddPost() {
     setShowAddPost(false)
   }
-  const PostListWithLoader = WithLoader(PostList);
+  const postsWithSearch = withSearch(PostList);
+  const PostListSearchLoader = WithLoader(postsWithSearch);
   return (
     <main>
       <div>
@@ -123,7 +124,7 @@ const PostsPage = () => {
             </Button>
           </Modal.Footer>
         </Modal>
-        <PostListWithLoader loading={loading} handleSelectPost={selectPost} posts={posts} handleUpdateClick={openUpdateModal} deletePost={deletePost} />
+        <PostListSearchLoader dataKey={"posts"} posts={posts} loading={loading} handleSelectPost={selectPost} handleUpdateClick={openUpdateModal} deletePost={deletePost} />
       </div>
     </main>
   );

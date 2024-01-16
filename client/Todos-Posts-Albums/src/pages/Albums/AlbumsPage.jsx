@@ -3,6 +3,7 @@ import AlbumList from '../../components/Albums/AlbumList';
 import useGetData from '../../hooks/useGetData'
 import { UserContext } from '../../App';
 import WithLoader from '../../components/WithLoader';
+import withSearch from '../../components/WithSearch';
 const AlbumsPage = () => {
   const user = useContext(UserContext);
   const [albums, setAlbums] = useState([]);
@@ -14,13 +15,14 @@ const AlbumsPage = () => {
       setAlbums(data);
     }
   }, [data, error]);
-  const AlbumListWithLoader = WithLoader(AlbumList)
+  const AlbumsListWithSearch = withSearch(AlbumList);
+  const AlbumsListSearchLoader = WithLoader(AlbumsListWithSearch);
   return (
     <main>
       <div>
         <h1>See all albums</h1>
       </div>
-      <AlbumListWithLoader loading={loading} albums={albums} />
+      <AlbumsListSearchLoader dataKey={"albums"} loading={loading} albums={albums} />
     </main>
   );
 };
