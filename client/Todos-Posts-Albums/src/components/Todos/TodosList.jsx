@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import TodoItem from './TodoItem';
-import AddTodoForm from './AddTodoForm';
+import AddTitleItem from '../AddTitleItem';
 
 const TodoList = (props) => {
 
@@ -99,7 +99,7 @@ const TodoList = (props) => {
                     </select>
                 </div>
                 <div className="col-md-9">
-                    <AddTodoForm addTodo={props.addTodo} />
+                    <AddTitleItem addItem={props.addTodo} itemName={"todo"}/>
                     <ul className="list-group">
                         {orderedTodos.map((todo) => (
                             <TodoItem

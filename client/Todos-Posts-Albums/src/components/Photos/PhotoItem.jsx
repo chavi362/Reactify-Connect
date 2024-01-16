@@ -14,7 +14,6 @@ const PhotoItem = (props) => {
   const handleImageFallback = (e) => {
     e.target.src = '../../assets/images/image-url-not-found.png';
   };
-
   return (
     <div className="card" >
       <div className="position-relative">

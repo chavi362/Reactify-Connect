@@ -1,14 +1,14 @@
 
 import React, { useState, useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
-import PhotosList from '../../components/Photos/PhotosList';
-import Pagination from '../../components/Pagination';
-import api from '../../Api';
-import { Modal, Button } from 'react-bootstrap';
-import WithLoader from '../../components/WithLoader';
-import UpdatePhotoForm from '../../components/Photos/UpdatePhotoForm';
+import PhotosList from '../components/Photos/PhotosList';
+import Pagination from '../components/Pagination';
+import api from '../Api';
+import { Modal } from 'react-bootstrap';
+import WithLoader from '../components/WithLoader';
+import UpdatePhotoForm from '../components/Photos/UpdatePhotoForm';
 import { FaPlusSquare } from 'react-icons/fa';
-import useGetPaginationData from '../../hooks/useGetPaginationData';
+import useGetPaginationData from '../hooks/useGetPaginationData';
 const PhotosPage = () => {
     const [showUpdateModal, setShowUpdateModal] = useState(false);
     const [selectedPhotoForUpdate, setSelectedPhotoForUpdate] = useState(null);

@@ -33,7 +33,6 @@ const UpdatePhotoForm = ({ photo, onUpdate }) => {
           onChange={handleChange}
         />
       </Form.Group>
-
       <Button variant="primary" type="button" onClick={handleUpdate}>
         Save the photo
       </Button>

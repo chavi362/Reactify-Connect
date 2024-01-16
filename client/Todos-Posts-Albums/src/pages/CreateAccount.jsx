@@ -5,7 +5,6 @@ import api from '../Api';
 const CreateAccount = () => {
   const navigate = useNavigate();
   const { email, password } = useParams();
-
   const [formUser, setFormUser] = useState({
     name: "",
     username: "",
@@ -23,9 +22,7 @@ const CreateAccount = () => {
     
   });
   useEffect(() => {
-    console.log('Current URL:', window.location.href);
     console.log(email)
-    console.log(password)
     setFormUser((prevFormUser) => ({
       ...prevFormUser,
       email: email || prevFormUser.email,
@@ -34,8 +31,7 @@ const CreateAccount = () => {
   }, [email, password]);
   const handleSubmit = (e) => {
     e.preventDefault();
-
-    navigate('/home');
+    navigate('/users/${userId}/home');
   };
   const handleChange = (event) => {
     const { name, value } = event.target;

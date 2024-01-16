@@ -3,7 +3,7 @@ import TodoList from '../components/Todos/TodosList';
 import WithLoader from '../components/WithLoader';
 import useGetData from '../hooks/useGetData';
 import { UserContext } from '../App';
-import api ,{addItem} from '../Api';
+import api from '../Api';
 
 const TodosPage = () => {
 	const user = useContext(UserContext);
@@ -19,13 +19,14 @@ const TodosPage = () => {
 
 	const addTodo = async (todoTitle) => {
 		try {
-			setLoading(true); // Set loading to true when initiating the request
+			setLoading(true);
 			const newTodo = {
 				userId: user.id,
 				title: todoTitle,
 				completed: false,
 			};
-			const addedTodo =  addItem('/todos',newTodo);
+			const response = await api.post('/todos', newTodo);
+			const addedTodo = response.data;
 			console.log('Todo added successfully');
 			setTodos((prevTodos) => [...prevTodos, addedTodo]);
 		} catch (error) {
@@ -64,13 +65,13 @@ const TodosPage = () => {
 			setLoading(false);
 		}
 	};
-	const TodoListWithLoader=WithLoader(TodoList)
+	const TodoListWithLoader = WithLoader(TodoList)
 	return (
 		<main>
 			<div>
 				<h1>This is what you have to do!</h1>
 			</div>
-					<TodoListWithLoader loading={loading} todos={todos} deleteTodo={deleteTodo} addTodo={addTodo} updateTodo={updateTodo}/>
+			<TodoListWithLoader loading={loading} todos={todos} deleteTodo={deleteTodo} addTodo={addTodo} updateTodo={updateTodo} />
 		</main>
 	);
 };

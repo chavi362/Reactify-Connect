@@ -1,10 +1,8 @@
 import React, { useState, useEffect } from 'react'
-import { Spinner } from 'react-bootstrap';
 import useGetData from '../../hooks/useGetData'
 import CommentsList from './CommentsList';
 import api from '../../Api';
 import WithLoader from '../WithLoader';
-
 const CommentsSection = (props) => {
     const [comments, setComments] = useState([]);
     const [data, error, loading, setLoading] = useGetData(`comments?postId=${props.postId}`);
@@ -18,7 +16,6 @@ const CommentsSection = (props) => {
     }, [data, error]);
     const addComment = async (commentContent) => {
         try {
-            console.log(commentContent)
             const newComment = { postId: props.postId, ...commentContent }
             console.log(newComment)
             setLoading(true);
@@ -34,7 +31,6 @@ const CommentsSection = (props) => {
             setLoading(false);
         }
     };
-
     const deleteComment = async (commentIdToDelete) => {
         try {
             setLoading(true)
@@ -50,24 +46,24 @@ const CommentsSection = (props) => {
     }
     const updateComment = async (commentToUpdate) => {
         try {
-          setLoading(true);
-          await api.put(`/comments/${commentToUpdate.id}`, commentToUpdate);
-          setComments((prevComments) =>
-            prevComments.map((comment) =>
-              comment.id === commentToUpdate.id ? { ...commentToUpdate } : comment
-            )
-          );
-          console.log(`Updated comment with ID ${commentToUpdate.id}`);
+            setLoading(true);
+            await api.put(`/comments/${commentToUpdate.id}`, commentToUpdate);
+            setComments((prevComments) =>
+                prevComments.map((comment) =>
+                    comment.id === commentToUpdate.id ? { ...commentToUpdate } : comment
+                )
+            );
+            console.log(`Updated comment with ID ${commentToUpdate.id}`);
         } catch (error) {
-          console.error('Error updating comment:', error);
+            console.error('Error updating comment:', error);
         } finally {
-          setLoading(false);
+            setLoading(false);
         }
-      };
-      const CommentsListWithLoader=WithLoader(CommentsList)
-       return (
+    };
+    const CommentsListWithLoader = WithLoader(CommentsList)
+    return (
         <div>
-                <CommentsListWithLoader loading={loading} comments={comments} deleteComment={deleteComment} addComment={addComment} updateComment={updateComment}></CommentsListWithLoader>
+            <CommentsListWithLoader loading={loading} comments={comments} deleteComment={deleteComment} addComment={addComment} updateComment={updateComment}></CommentsListWithLoader>
         </div>
     )
 }

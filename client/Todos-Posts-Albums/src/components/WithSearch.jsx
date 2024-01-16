@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 
 const withSearch = (WrappedComponent) => {
   return (props) => {
-    console.log("searchProps", props);
     const dataKey=props.dataKey;
     const [searchTerm, setSearchTerm] = useState({ id: '', title: '' });
     const handleSearchChange = (e) => {
@@ -18,7 +17,6 @@ const withSearch = (WrappedComponent) => {
       );
     }) : [];
     const combinedProps = { ...props, [dataKey]: filteredData };
-    console.log(combinedProps)
     return (
       <div className="container-fluid">
         <div className="row">

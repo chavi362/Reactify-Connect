@@ -13,11 +13,9 @@ const useGetPaginationData = (urlParam) => {
             try {
                 setLoading(true);
 
-                // Make the API request
                 const response = await api.get(urlParam);
                 setData(response.data);
 
-                // Handle pagination
                 const linkHeader = response.headers.link;
                 if (linkHeader) {
                     pagination(linkHeader);
@@ -31,8 +29,6 @@ const useGetPaginationData = (urlParam) => {
 
         const pagination = (headers) => {
             const links = headers.split(',');
-
-            // State representation of pages availability
             const pages = { nextPage: false, prevPage: false };
             links.forEach((link) => {
                 const temp = link.split(';');
@@ -50,11 +46,9 @@ const useGetPaginationData = (urlParam) => {
             setNextPage(pages.nextPage);
             setPrevPage(pages.prevPage);
         };
-
         fetchData();
     }, [urlParam]);
-
-    return [data, error, loading, setLoading,prevPage, setPrevPage,nextPage,setNextPage];
+    return [data, error, loading, setLoading, prevPage, setPrevPage,nextPage,setNextPage];
 };
 
 export default useGetPaginationData;

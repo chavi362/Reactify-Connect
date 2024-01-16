@@ -1,13 +1,13 @@
-import React from 'react'
-import { NavLink } from 'react-router-dom'
+import React from 'react';
+import { NavLink } from 'react-router-dom';
 
-const Error = () => {
+const Error = ({ userId }) => {
   return (
     <div>
-      <h1>Sorry, an error accoured while fetching the data</h1>
-      <NavLink to="/">Return to home page</NavLink>
+      <h1>Sorry, an error occurred while fetching the data</h1>
+      <NavLink to={`/users/${userId}/home`}>Return to home page</NavLink>
     </div>
-  )
-}
+  );
+};
 
-export default Error
+export default Error;

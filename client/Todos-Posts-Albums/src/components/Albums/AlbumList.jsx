@@ -1,9 +1,11 @@
-import React from 'react'
+import React,{useState} from 'react'
 import AlbumItem from './AlbumItem';
+import AddTitleItem from '../AddTitleItem';
 const AlbumList = (props) => {
+  
   return (
     <div className='container'>
-    
+      <AddTitleItem addItem={props.addAlbum} itemName={"album"}/>
     <div className='row'>
     {
       props.albums.map((album) => (

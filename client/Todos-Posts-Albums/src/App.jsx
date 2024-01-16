@@ -4,7 +4,7 @@ import { createContext } from 'react';
 import useLocalStorage from './hooks/useLocalStorage';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import TodosPage from './pages/TodosPage';
-import AlbumsPage from './pages/Albums/AlbumsPage'
+import AlbumsPage from './pages/AlbumsPage'
 import Home from './pages/Home';
 import Info from './pages/Info';
 import Error from './pages/Error';
@@ -12,8 +12,8 @@ import Login from './pages/Login';
 import Register from './pages/Register';
 import CreateAccount from './pages/CreateAccount';
 import Layout from './components/Layout';
-import PhotosPage from './pages/Albums/PhotosPage';
-import PostsPage from './pages/PostsPage';
+import PhotosPage from './pages/PhotosPage';
+import PostsPage from './pages/MyPostsPage';
 import AllPost from './pages/AllPost';
 import './App.css'
 export const UserContext = createContext();
@@ -31,8 +31,8 @@ function App() {
             <Route path="/login" element={<Login updateUserContext={setUser} />} />
             <Route path="/register" element={<Register updateUserContext={setUser} />} />
             <Route path="/create-account" element={<CreateAccount updateUserContext={setUser} />} />
-            <Route path="home" index element={<Home />} />
             <Route path="users/:userId/"  >
+              <Route path="home" index element={<Home />} />
               <Route path="info" element={<Info />} />
               <Route path="albums" element={<AlbumsPage />} />
               <Route path="albums/:albumid/photos" element={<PhotosPage />} />

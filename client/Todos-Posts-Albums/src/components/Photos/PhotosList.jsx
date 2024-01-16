@@ -19,5 +19,4 @@ const PhotosList = (props) => {
     </div>
   );
 };
-
 export default PhotosList;
