@@ -1,24 +1,26 @@
-import { Outlet } from "react-router-dom";
-import React, { useContext, useEffect } from "react"
+import { Outlet, useLocation } from "react-router-dom";
+import React, { useContext, useEffect } from "react";
 import AppNavbar from "./AppNavbar";
 import { UserContext } from '../App';
 import { useNavigate } from 'react-router-dom';
-
-
-export default function Layout() {
+import "../sass/appNavBar.scss"
+export default function Layout({deleteUser}) {
     const user = useContext(UserContext);
     const navigate = useNavigate();
+    const location = useLocation();
     useEffect(() => {
-        if (!user)
-            navigate('/login')
-    }), [user]
+        if (!user && location.pathname !== '/register') {
+            navigate('/login');
+            console.log('path', location.pathname)
+        }
 
+    }, [])
     return (
-        <div className="site-wrapper">
-            {user && <AppNavbar />}
+        <div className="site">
+            {user && <AppNavbar deleteUser={deleteUser}/>}
             <main>
                 <Outlet />
             </main>
         </div>
-    )
+    );
 }

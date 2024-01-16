@@ -2,6 +2,7 @@ import React from 'react';
 import PostItem from './PostItem';
 
 const PostList = (props) => {
+  console.log(props.posts)
   return (
     <div className='row'>
       {props.posts.map((post) => (

@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useContext } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { Modal, Button, Form } from 'react-bootstrap';
 import useGetData from '../hooks/useGetData';
 import { UserContext } from '../App';
@@ -9,6 +10,7 @@ import WithLoader from '../components/WithLoader';
 import { FaPlusSquare } from 'react-icons/fa';
 import AddNewPost from '../components/Posts/AddNewPost';
 const PostsPage = () => {
+  const navigate = useNavigate();
   const user = useContext(UserContext);
   const [showUpdateModal, setShowUpdateModal] = useState(false);
   const [updatedPost, setUpdatedPost] = useState({ userId: '', id: '', title: '', body: '' });
@@ -23,17 +25,14 @@ const PostsPage = () => {
     } else if (data) {
       setPosts(data);
     }
-  }, [data, error, loading]);
-
+  }, [data, error]);
   const selectPost = (post) => {
     setSelectedPost({ ...post });
     setShowFullPost(true);
   };
-
   const closeFullPost = () => {
     setShowFullPost(false);
   };
-
   const openUpdateModal = (post) => {
     setUpdatedPost(post);
     setShowUpdateModal(true);
@@ -42,12 +41,11 @@ const PostsPage = () => {
   const closeUpdateModal = () => {
     setShowUpdateModal(false);
   };
-
   const deletePost = async (postIdToDelete) => {
     try {
       setLoading(true);
       await api.delete(`/posts/${postIdToDelete}`);
-      setPosts((prevPosts) => prevPosts.filter((post) => post.id !== postIdToDelete));
+      setPosts((prevPosts) => [...prevPosts.filter((post) => post.id !== postIdToDelete)]);
       console.log(`Deleted post with ID ${postIdToDelete}`);
     } catch (error) {
       console.error('Error deleting post:', error);
@@ -55,7 +53,6 @@ const PostsPage = () => {
       setLoading(false);
     }
   };
-
   const updatePost = async () => {
     try {
       setLoading(true);
@@ -91,45 +88,45 @@ const PostsPage = () => {
       setLoading(false);
     }
   }
-    function closeAddPost() {
-      setShowAddPost(false)
-    }
-    const PostListWithLoader = WithLoader(PostList);
-    return (
-      <main>
-        <div>
-          <h1>My blog</h1>
-          {!showAddPost && (
-            <button onClick={() => setShowAddPost(true)}>
-              <FaPlusSquare /> Add new post
-            </button>
-          )}
-          <AddNewPost show={showAddPost} handleClose={closeAddPost} handleAddPost={addPost} />
-          {showFullPost && <FullPost close={closeFullPost} post={selectedPost} />}
-          <Modal show={showUpdateModal} onHide={closeUpdateModal}>
-            <Modal.Header closeButton>
-              <Modal.Title>Edit Post Content</Modal.Title>
-            </Modal.Header>
-            <Modal.Body>
-              <Form.Control
-                as="textarea"
-                value={updatedPost.body}
-                onChange={(e) => setUpdatedPost({ ...updatedPost, body: e.target.value })}
-              />
-            </Modal.Body>
-            <Modal.Footer>
-              <Button variant="secondary" onClick={closeUpdateModal}>
-                Cancel
-              </Button>
-              <Button variant="primary" onClick={updatePost}>
-                Save
-              </Button>
-            </Modal.Footer>
-          </Modal>
-          <PostListWithLoader loading={loading} handleSelectPost={selectPost} posts={posts} handleUpdateClick={openUpdateModal} deletePost={deletePost} />
-        </div>
-      </main>
-    );
-  };
+  function closeAddPost() {
+    setShowAddPost(false)
+  }
+  const PostListWithLoader = WithLoader(PostList);
+  return (
+    <main>
+      <div>
+        <h1>My blog</h1>
+        {!showAddPost && (
+          <button onClick={() => setShowAddPost(true)}>
+            <FaPlusSquare /> Add new post
+          </button>
+        )}
+        <AddNewPost show={showAddPost} handleClose={closeAddPost} handleAddPost={addPost} />
+        {showFullPost && <FullPost close={closeFullPost} post={selectedPost} />}
+        <Modal show={showUpdateModal} onHide={closeUpdateModal}>
+          <Modal.Header closeButton>
+            <Modal.Title>Edit Post Content</Modal.Title>
+          </Modal.Header>
+          <Modal.Body>
+            <Form.Control
+              as="textarea"
+              value={updatedPost.body}
+              onChange={(e) => setUpdatedPost({ ...updatedPost, body: e.target.value })}
+            />
+          </Modal.Body>
+          <Modal.Footer>
+            <Button variant="secondary" onClick={closeUpdateModal}>
+              Cancel
+            </Button>
+            <Button variant="primary" onClick={updatePost}>
+              Save
+            </Button>
+          </Modal.Footer>
+        </Modal>
+        <PostListWithLoader loading={loading} handleSelectPost={selectPost} posts={posts} handleUpdateClick={openUpdateModal} deletePost={deletePost} />
+      </div>
+    </main>
+  );
+};
 
-  export default PostsPage
+export default PostsPage

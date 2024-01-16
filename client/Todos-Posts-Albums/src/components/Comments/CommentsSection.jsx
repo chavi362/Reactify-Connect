@@ -15,7 +15,7 @@ const CommentsSection = (props) => {
             setComments(data);
             console.log(comments);
         }
-    }, [data, error, loading]);
+    }, [data, error]);
     const addComment = async (commentContent) => {
         try {
             console.log(commentContent)

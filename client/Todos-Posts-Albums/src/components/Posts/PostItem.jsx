@@ -7,7 +7,7 @@ const PostItem = (props) => {
         <p className="card-title">POST {props.post.id}</p>
         <p className="card-text">{props.post.title}</p>
         <button onClick={props.handleUpdateClick} className="btn btn-sm btn-primary">
-          <FaEdit /> Edit
+          <FaEdit /> Edit Content
         </button>
         <button  className="btn btn-sm btn-danger me-2" onClick={props.handleDelete}>
           <FaTrashAlt /> Delete

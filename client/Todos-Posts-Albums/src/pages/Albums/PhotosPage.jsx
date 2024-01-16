@@ -26,7 +26,7 @@ const PhotosPage = () => {
         } else if (data) {
             setPhotos(data);
         }
-    }, [data, error, loading]);
+    }, [data, error]);
     const deletePhoto = async (photoIdToDelete) => {
         try {
             setLoading(true);
@@ -64,13 +64,16 @@ const PhotosPage = () => {
             } else {
                 await api.put(`photos/${dbPhoto.id}`, dbPhoto);
             }
-            fetchData();
             console.log(`successfullyphoto with ID ${dbPhoto.id}`);
+            setPhotos((prevPhotos) =>
+            prevPhotos.map((photo) =>
+            photo.id === dbPhoto.id ? { ...dbPhoto } : photo
+            ));
         } catch (error) {
             console.error('Error updating photo:', error);
         } finally {
             setLoading(false);
-            handleCloseUpdateModal(); // Close the modal after updating or adding
+            handleCloseUpdateModal();
         }
     };
     const loadNextPage = () => {

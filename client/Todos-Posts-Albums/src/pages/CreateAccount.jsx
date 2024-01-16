@@ -92,8 +92,6 @@ const CreateAccount = () => {
                           Address
                         </label>
                       </div>
-
-                      {/* Phone Input */}
                       <div className="form-outline mb-4">
                         <input
                           id="form2Example55"
@@ -107,8 +105,6 @@ const CreateAccount = () => {
                           Phone Number
                         </label>
                       </div>
-
-                      {/* Company Name Input */}
                       <div className="form-outline mb-4">
                         <input
                           id="form2Example66"
@@ -122,8 +118,6 @@ const CreateAccount = () => {
                           Company Name
                         </label>
                       </div>
-
-                      {/* Catch Phrase Input */}
                       <div className="form-outline mb-4">
                         <input
                           id="form2Example77"

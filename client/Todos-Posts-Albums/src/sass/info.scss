@@ -1,0 +1,126 @@
+@import './variables.scss';
+// $color-primary: #007bff;
+// $secondary-color: #6c757d;
+
+// Styles
+body {
+  margin-top: 20px;
+  color: #1a202c;
+  text-align: left;
+//   background-color: #f0e2e9;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.main-body {
+  padding: 15px;
+}
+
+.breadcrumb {
+  background-color: #fff;
+  border: 1px solid #ddd;
+  border-radius: 0.25rem;
+  padding: 0.75rem 1rem;
+  margin-bottom: 1rem;
+
+  .breadcrumb-item {
+    a {
+      color: $color-primary;
+
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+
+    &.active {
+      color: $secondary-color;
+    }
+  }
+}
+
+.user-card {
+  .card {
+    box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
+
+    .card-body {
+      flex: 1 1 auto;
+      min-height: 1px;
+      padding: 1rem;
+
+      .d-flex {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+
+        img {
+          border-radius: 50%;
+          margin-bottom: 1rem;
+        }
+
+        h4 {
+          margin: 0;
+        }
+
+        p {
+          &.text-secondary {
+            margin-bottom: 1rem;
+          }
+
+          &.font-size-sm {
+            font-size: 0.875rem;
+          }
+        }
+
+        button {
+          &.btn-primary {
+            background-color: $color-primary;
+            border-color: $color-primary;
+          }
+
+          &.btn-outline-primary {
+            color: $color-primary;
+            border-color: $color-primary;
+
+            &:hover {
+              background-color: $color-primary;
+              color: #fff;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+.user-info-card {
+  .card {
+    box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
+
+    .card-body {
+      .row {
+        margin-bottom: 1rem;
+
+        h6 {
+          margin-bottom: 0;
+        }
+
+        .text-secondary {
+          color: $secondary-color;
+        }
+
+        .btn-info {
+          background-color: $color-primary;
+          border-color: $color-primary;
+
+          &:hover {
+            background-color: darken($color-primary, 10%);
+            border-color: darken($color-primary, 10%);
+          }
+        }
+      }
+    }
+  }
+}

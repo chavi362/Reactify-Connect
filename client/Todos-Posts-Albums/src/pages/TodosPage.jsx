@@ -1,9 +1,9 @@
 import React, { useState, useEffect, useContext } from 'react';
-import TodoList from '../../components/Todos/TodosList';
-import WithLoader from '../../components/WithLoader';
-import useGetData from '../../hooks/useGetData';
-import { UserContext } from '../../App';
-import api from "../../Api";
+import TodoList from '../components/Todos/TodosList';
+import WithLoader from '../components/WithLoader';
+import useGetData from '../hooks/useGetData';
+import { UserContext } from '../App';
+import { getAllData, addItem, deleteItem, updatePost } from "../Api";
 
 const TodosPage = () => {
 	const user = useContext(UserContext);
@@ -15,7 +15,7 @@ const TodosPage = () => {
 		} else if (data) {
 			setTodos(data);
 		}
-	}, [data, error, loading]);
+	}, [data, error]);
 
 	const addTodo = async (todoTitle) => {
 		try {
@@ -25,18 +25,14 @@ const TodosPage = () => {
 				title: todoTitle,
 				completed: false,
 			};
-			// Add the new todo to the list
-			const response = await api.post('/todos', newTodo);
-			const addedTodo = response.data;
-
+			const addedTodo =  addItem('/todos',newTodo);
 			console.log('Todo added successfully');
-			//const updatedTodos = [...todos, addedTodo];
 			setTodos((prevTodos) => [...prevTodos, addedTodo]);
 		} catch (error) {
 			console.error('Error adding todo:', error);
 			console.log('Detailed error response:', error.response);
 		} finally {
-			setLoading(false); // Set loading to false regardless of success or error
+			setLoading(false);
 		}
 	};
 	const deleteTodo = async (todoIdToDelete) => {

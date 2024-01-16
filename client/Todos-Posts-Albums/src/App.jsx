@@ -1,11 +1,12 @@
 import React from 'react';
-import { BrowserRouter, Routes, Route, Navigate,Outlet  } from 'react-router-dom';
+import { BrowserRouter, Routes, Route, Outlet } from 'react-router-dom';
 import { createContext } from 'react';
 import useLocalStorage from './hooks/useLocalStorage';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import TodosPage from './pages/Todos/TodosPage';
+import TodosPage from './pages/TodosPage';
 import AlbumsPage from './pages/Albums/AlbumsPage'
 import Home from './pages/Home';
+import Info from './pages/Info';
 import Error from './pages/Error';
 import Login from './pages/Login';
 import Register from './pages/Register';
@@ -15,32 +16,32 @@ import PhotosPage from './pages/Albums/PhotosPage';
 import PostsPage from './pages/PostsPage';
 import AllPost from './pages/AllPost';
 import './App.css'
-
 export const UserContext = createContext();
 function App() {
-  const [user, setUser] = useLocalStorage('user', null);
+  const [user, setUser, claerLocalStorage] = useLocalStorage('user', null);
+  const deleteUser = () => {
+    claerLocalStorage();
+    setUser(null);
+  }
   return (
     <BrowserRouter>
       <UserContext.Provider value={user}>
         <Routes>
-          <Route path="/" element={<Layout />}>
-            <Route index element={<Home />} />
-            <Route path="/login" setUser={setUser} element={<Login updateUserContext={setUser} />} />
-            <Route path="/register" element={<Register />} />
-            <Route path="/all-posts" element={<AllPost />} />
-            <Route path="/create-account" element={<CreateAccount />} />
-            {/* <Route path="/users/:userId" element={<Info />}> */}
-              <Route path="albums" element={<Outlet />}>
-                <Route index element={<AlbumsPage />} />
-                <Route path=":albumid/photos" element={<PhotosPage />} />
-              </Route>
-              <Route path="posts" element={<Outlet />}>
-                <Route index element={<PostsPage />} />
-                </Route>
-              <Route path="todos" element={<TodosPage />}/>
-              <Route path="*" element={<Error />} />
+          <Route path="/" element={<Layout deleteUser={deleteUser} />}>
+            <Route path="/login" element={<Login updateUserContext={setUser} />} />
+            <Route path="/register" element={<Register updateUserContext={setUser} />} />
+            <Route path="/create-account" element={<CreateAccount updateUserContext={setUser} />} />
+            <Route path="users/:userId/"  >
+              <Route path="home" index element={<Home />} />
+              <Route path="info" element={<Info />} />
+              <Route path="albums" element={<AlbumsPage />} />
+              <Route path="albums/:albumid/photos" element={<PhotosPage />} />
+              <Route path="posts/" element={<PostsPage />} />
+              <Route path="todos" element={<TodosPage />} />
             </Route>
-          {/* </Route> */}
+            <Route path="/all-posts" element={<AllPost />} />
+            <Route path="*" element={<Error />} />
+          </Route>
         </Routes>
       </UserContext.Provider>
     </BrowserRouter>

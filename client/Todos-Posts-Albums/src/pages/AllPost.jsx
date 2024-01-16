@@ -8,9 +8,7 @@ const AllPost = () => {
   const perPage = 12;
   const [page, setPage] = useState(1);
   const [posts, setPosts] = useState([]);
-  const [data, error, loading, setLoading, prevPage, setPrevPage, nextPage, setNextPage] = useGetPaginationData(
-    `posts&_page=${page}&_limit=${perPage}`
-  );
+  const [data, error, loading, setLoading, prevPage, setPrevPage, nextPage, setNextPage] = useGetPaginationData(`posts?_page=${page}&_limit=${perPage}`);
 
   useEffect(() => {
     if (error) {
@@ -18,20 +16,18 @@ const AllPost = () => {
     } else if (data) {
       setPosts(data);
     }
-  }, [data, error, loading]);
-
+  }, [data, error]);
   const loadNextPage = () => {
     setPage(page + 1);
   };
-
   const loadPrevPage = () => {
     setPage(page - 1);
   };
-
   const PaginationWithLoader = WithLoader(Pagination);
-
+  const PostListWithLoader=WithLoader(PostList);
   return (
     <div>
+      <PostListWithLoader loading={loading} posts={posts} />
       <PaginationWithLoader
         loading={loading}
         isNext={nextPage}

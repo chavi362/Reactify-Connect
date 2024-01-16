@@ -19,10 +19,10 @@ const PhotoItem = (props) => {
   };
 
   return (
-    <div className="card" style={{ width: '28rem', margin: '10px' }}>
+    <div className="card" >
       <div className="position-relative">
         {!imageLoaded && !imageError && (
-          <Spinner className="position-absolute top-50 start-50 translate-middle" animation="border" />
+          <Spinner className="position-absolute top-50 start-50 translate-middle">loading</Spinner>
         )}
         <img
           className={`card-img-top ${imageLoaded ? 'loaded' : ''} ${imageError ? 'error' : ''}`}

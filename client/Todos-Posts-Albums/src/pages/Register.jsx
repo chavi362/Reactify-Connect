@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import '../sass/form.scss'
+import api from '../Api';
 const Register = () => {
   const navigate = useNavigate();
   const [user, setUser] = useState({
@@ -10,26 +11,24 @@ const Register = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    fetch(`http://localhost:3000/users?email=${user.email}`)
-      .then((response) => response.json())
-      .then((users) => {
-        const foundUser = users[0];
-        if (foundUser) {
-          alert("User with this email already exists");
-        } else {
-          if (!isStrongPassword(user.password)) {
-            alert('Password must be at least 8 characters long and contain at least one uppercase letter, one lowercase letter, and one digit.');
-            return;
-          }
-          navigate(`/create-account?email=${user.email}&password=${user.password}`);
+    try {
+      const response = await api.get(`users?email=${user.email}`);
+      const users = response.data;
+      if (users.length) {
+        alert("User with this email already exists");
+      } else {
+        if (!isStrongPassword(user.password)) {
+          alert('Password must be at least 8 characters long and contain at least one uppercase letter, one lowercase letter, and one digit.');
+          return;
         }
-      })
-      .catch((error) => {
-        console.error('Error fetching user data:', error);
-      });
-  };
-  
-
+        const response =await api.post('users', { email: user.email, website: user.password });
+      
+        navigate(`/create-account`);
+      }
+    } catch (error) {
+      console.error('Error registering user:', error);
+    }
+  }
   const handleChange = (event) => {
     const { name, value } = event.target;
     setUser((prevUser) => ({
@@ -37,7 +36,7 @@ const Register = () => {
       [name]: value,
     }));
   };
-
+  
   const isStrongPassword = (password) => {
     const passwordRegex = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}$/;
     return passwordRegex.test(password);
@@ -61,10 +60,8 @@ const Register = () => {
                         />
                         <h4 className="mt-1 mb-5 pb-1">We are The Lotus Team</h4>
                       </div>
-
                       <form onSubmit={handleSubmit}>
                         <p>Please register</p>
-
                         <div className="form-outline mb-4">
                           <input
                             type="email"
@@ -134,5 +131,6 @@ const Register = () => {
     </>
   );
 };
+
 
 export default Register;
