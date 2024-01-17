@@ -14,6 +14,12 @@ const TodoList = (props) => {
         { value: 'alphabetical', label: 'Alphabetical' },
         { value: 'random', label: 'Random' },
     ];
+    const handleSearchChange = (e) => {
+        setSearchTerm({
+            ...searchTerm,
+            [e.target.name]: e.target.value,
+        });
+    };
     const sortTodos = (todos, order) => {
         switch (order) {
             case 'sequential':
@@ -47,16 +53,13 @@ const TodoList = (props) => {
     const searchTodos = (todos) => {
         return todos.filter((todo) => {
             return (
-                todo.id.toString().includes(searchTerm) ||
-                todo.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
-                todo.completed.toString().includes(searchTerm.toLowerCase())
+                todo.id.toString().includes(searchTerm.id) &&
+                todo.title.toLowerCase().includes(searchTerm.title.toLowerCase())
             );
         });
     };
-
     const filteredTodos = searchTodos(filterTodos(props.todos));
     const orderedTodos = sortTodos(filteredTodos, order);
-
     return (
         <div className="container mt-3">
             <div className="row">
@@ -73,15 +76,31 @@ const TodoList = (props) => {
                             <option value="uncompleted">Uncompleted</option>
                         </select>
                     </label>
-                    <label className="mb-2" htmlFor="search"></label>
-                    Search:
-                    <input
-                        id="search"
-                        type="text"
-                        className="form-control"
-                        value={searchTerm}
-                        onChange={(e) => setSearchTerm(e.target.value)}
-                    />
+                    <div className="mb-3">
+                        <label className="mb-2" htmlFor="searchId">Search by id:</label>
+                        <input
+                            type="text"
+                            className="form-control"
+                            placeholder="Search by id"
+                            value={searchTerm.id}
+                            onChange={handleSearchChange}
+                            name="id"
+                            id="searchId"
+                        />
+                    </div>
+                    <label className="mb-2" htmlFor="searchTitle">Search by title:</label>
+                    <div className="mb-3">
+                        <input
+                            type="text"
+                            className="form-control"
+                            placeholder="Search by title"
+                            value={searchTerm.title}
+                            onChange={handleSearchChange}
+                            name="title"
+                            id="searchTitle"
+                        />
+                    </div>
+
                     <br></br><br></br>
                     <h4>order by:</h4>
                     <label className="mb-2" htmlFor="orderSelect"></label>
@@ -99,7 +118,7 @@ const TodoList = (props) => {
                     </select>
                 </div>
                 <div className="col-md-9">
-                    <AddTitleItem addItem={props.addTodo} itemName={"todo"}/>
+                    <AddTitleItem addItem={props.addTodo} itemName={"todo"} />
                     <ul className="list-group">
                         {orderedTodos.map((todo) => (
                             <TodoItem

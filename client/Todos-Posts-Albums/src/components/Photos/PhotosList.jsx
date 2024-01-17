@@ -1,6 +1,5 @@
 import React from 'react';
 import PhotoItem from './PhotoItem';
-
 const PhotosList = (props) => {
   return (
     <div className='row'>
