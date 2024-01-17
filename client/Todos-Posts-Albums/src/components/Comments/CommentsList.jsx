@@ -59,5 +59,4 @@ const CommentsList = ({ comments, addComment, deleteComment, updateComment }) =>
   );
 };
 
-
 export default CommentsList;

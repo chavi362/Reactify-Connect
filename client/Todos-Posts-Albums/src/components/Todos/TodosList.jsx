@@ -5,7 +5,7 @@ import AddTitleItem from '../AddTitleItem';
 const TodoList = (props) => {
 
     const [filter, setFilter] = useState('sequential');
-    const [searchTerm, setSearchTerm] = useState('');
+    const [searchTerm, setSearchTerm] = useState({ id: '', title: '' });
     const [order, setOrder] = useState('sequential');
     const orderOptions = [
         { value: 'sequential', label: 'Sequential' },

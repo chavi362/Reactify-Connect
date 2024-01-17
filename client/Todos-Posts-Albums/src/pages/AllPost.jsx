@@ -3,7 +3,8 @@ import Pagination from '../components/Pagination';
 import useGetPaginationData from '../hooks/useGetPaginationData';
 import WithLoader from '../components/WithLoader';
 import PostList from '../components/Posts/PostList';
-
+import withSearch from '../components/WithSearch';
+import withPostActions from '../components/Posts/WithPostsAction.';
 const AllPost = () => {
   const perPage = 12;
   const [page, setPage] = useState(1);
@@ -24,10 +25,12 @@ const AllPost = () => {
     setPage(page - 1);
   };
   const PaginationWithLoader = WithLoader(Pagination);
-  const PostListWithLoader = WithLoader(PostList);
+  const postsWithSearch = withSearch(PostList);
+  const PostListSearchLoader = WithLoader(postsWithSearch);
+  const PostListWithActions =withPostActions(PostListSearchLoader)
   return (
     <div>
-      <PostListWithLoader loading={loading} posts={posts} />
+      <PostListWithActions  dataKey={"posts"} posts={posts} loading={loading}  handleUpdateClick={null} deletePost={null} allowEditDelete={false} />
       <PaginationWithLoader
         loading={loading}
         isNext={nextPage}

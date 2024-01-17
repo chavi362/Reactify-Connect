@@ -1,5 +1,5 @@
 
-import React, { useState, useEffect } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import { useLocation } from 'react-router-dom';
 import PhotosList from '../components/Photos/PhotosList';
 import Pagination from '../components/Pagination';
@@ -19,11 +19,13 @@ const PhotosPage = () => {
     const [page, setPage] = useState(1);
     const [photos, setPhotos] = useState([]);
     const [isAdding, setIsAdding] = useState(false);
+    const lastFetchedPhotos = useRef([]);
     const [data, error, loading, setLoading, prevPage, setPrevPage, nextPage, setNextPage] = useGetPaginationData(`photos?albumId=${albumId}&_page=${page}&_limit=${perPage}`);
     useEffect(() => {
         if (error) {
             console.error('Error fetching photos:', error);
         } else if (data) {
+            lastFetchedPhotos.current = data.slice(-3);
             setPhotos(data);
         }
     }, [data, error]);
@@ -31,7 +33,15 @@ const PhotosPage = () => {
         try {
             setLoading(true);
             await api.delete(`/photos/${photoIdToDelete}`);
-            setPhotos((prevPhotos) => prevPhotos.filter((photo) => photo.id !== photoIdToDelete));
+    
+            setPhotos((prevPhotos) => {
+                const deletedPhotoIndex = prevPhotos.findIndex((photo) => photo.id === photoIdToDelete);
+                const replacementPhoto = lastFetchedPhotos.current.shift();
+                const updatedPhotos = [...prevPhotos];
+                updatedPhotos.splice(deletedPhotoIndex, 1, replacementPhoto);
+                return updatedPhotos;
+            });
+    
             console.log(`Deleted photo with ID ${photoIdToDelete}`);
         } catch (error) {
             console.error('Error deleting photo:', error);
@@ -39,7 +49,6 @@ const PhotosPage = () => {
             setLoading(false);
         }
     };
-
     const handleCloseUpdateModal = () => {
         setShowUpdateModal(false);
         setSelectedPhotoForUpdate(null);
