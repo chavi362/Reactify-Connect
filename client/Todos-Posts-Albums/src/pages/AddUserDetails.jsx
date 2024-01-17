@@ -1,14 +1,15 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect ,useContext} from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import '../sass/form.scss'
 import api from '../Api';
-const AddUserDetails = () => {
+import { UserContext } from '../App';
+const AddUserDetails = ({ updateUserContext }) => {
+  const user = useContext(UserContext);
   const navigate = useNavigate();
-  const { email, password } = useParams();
   const [formUser, setFormUser] = useState({
     name: "",
     username: "",
-    email: "",
+    phone:"",
     address: {
       street: "",
       suite: "",
@@ -24,21 +25,33 @@ const AddUserDetails = () => {
       companyName: "",
       catchPhrase: "",
     }
-
-
   });
   useEffect(() => {
-    console.log(email)
     setFormUser((prevFormUser) => ({
+      id:user.id,
+      email: user.email,
       ...prevFormUser,
-      email: email || prevFormUser.email,
-      website: password || prevFormUser.website,
     }));
-  }, [email, password]);
-  const handleSubmit = (e) => {
+  }, [user]);
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    navigate('/users/${userId}/home');
+    try {
+      const updatedFormUser = { ...formUser, id: user.id };
+      const response = await api.put(`users/${user.id}`, updatedFormUser);
+  
+      if (response.error) {
+        console.error('Error updating user details:', response.error);
+      } else {
+        const updatedUser = response.data;
+        updateUserContext(updatedUser);
+        navigate(`/users/${updatedUser.id}/home`);
+      }
+    } catch (error) {
+      console.error('Error updating user details:', error);
+    }
   };
+  
+  
   const handleChange = (event) => {
     const { name, value } = event.target;
     setFormUser((prevUser) => ({
@@ -46,7 +59,16 @@ const AddUserDetails = () => {
       [name]: value,
     }));
   };
-
+  const handleChangeNested = (parentKey, key, event) => {
+    const { value } = event.target;
+    setFormUser((prevUser) => ({
+      ...prevUser,
+      [parentKey]: {
+        ...prevUser[parentKey],
+        [key]: value,
+      },
+    }));
+  };
   return (
     <section className="h-100 gradient-form" style={{ backgroundColor: '#eee' }}>
       <div className="container py-5 h-100">
@@ -77,7 +99,20 @@ const AddUserDetails = () => {
                           name="username"
                         />
                         <label className="form-label" htmlFor="username">
-                        username
+                          username
+                        </label>
+                      </div>
+                      <div className="form-outline mb-4">
+                        <input
+                          id="phone"
+                          className="form-control"
+                          placeholder="Your phone"
+                          value={formUser.phone}
+                          onChange={handleChange}
+                          name="phone"
+                        />
+                        <label className="form-label" htmlFor="phone">
+                          username
                         </label>
                       </div>
                       <div className="form-outline mb-4">
@@ -94,50 +129,47 @@ const AddUserDetails = () => {
                         </label>
                       </div>
                       <div className="form-outline mb-4">
-                        <input
-                          id="form2Example44"
-                          className="form-control"
-                          placeholder="Your address"
-                          value={formUser.address}
-                          onChange={handleChange}
-                          name="address"
-                        />
-                        <label className="form-label">
-                          Address
-                        </label>
-                      </div>
-                      <div className="form-outline mb-4">
                         <div className="d-flex">
                           <input
                             className="form-control me-2"
                             placeholder="Street"
-                            value={formUser.street}
-                            onChange={handleChange}
+                            value={formUser.address.street}
+                            onChange={(e) => handleChangeNested('address', 'street', e)}
                             name="street"
                           />
                           <input
                             className="form-control me-2"
                             placeholder="Suite"
-                            value={formUser.suite}
-                            onChange={handleChange}
+                            value={formUser.address.suit}
+                            onChange={(e) => handleChangeNested('address', 'suit', e)}
                             name="suite"
                           />
                           <input
                             className="form-control"
                             placeholder="City"
-                            value={formUser.city}
-                            onChange={handleChange}
+                            value={formUser.address.city}
+                            onChange={(e) => handleChangeNested('address', 'city', e)}
                             name="city"
                           />
                           <input
                             className="form-control"
                             placeholder="zip code"
-                            value={formUser.zipcode}
-                            onChange={handleChange}
+                            value={formUser.address.zipcode}
+                            onChange={(e) => handleChangeNested('address', 'zipcode', e)}
                             name="zipcode"
                           />
                         </div>
-                        <label className="form-label" htmlFor="form2Example66">
+                      </div>
+                      <div className="form-outline mb-4">
+                        <input
+                          id="company-name"
+                          className="form-control"
+                          placeholder="Your company"
+                          value={formUser.company.companyName}
+                          onChange={(e) => handleChangeNested('company', 'companyName', e)}
+                          name="companyName"
+                        />
+                        <label className="form-label" htmlFor="company-name">
                           Company Name
                         </label>
                       </div>
@@ -146,19 +178,19 @@ const AddUserDetails = () => {
                           id="form2Example77"
                           className="form-control"
                           placeholder="Your catch phrase"
-                          value={formUser.catchPhrase}
-                          onChange={handleChange}
+                          value={formUser.company.catchPhrase}
+                          onChange={(e) => handleChangeNested('company', 'catchPhrase', e)}
                           name="catchPhrase"
                         />
                         <label className="form-label" htmlFor="form2Example77">
-                          company catch phrase
+                          Company Catch Phrase
                         </label>
+                        <br /><br />
                         <br /><br />
                         <button
                           className="btn btn-primary btn-block fa-lg gradient-custom-2 mb-3"
                           type="submit"
                         >
-
                           Create Account
                         </button>
                       </div>
