@@ -10,7 +10,6 @@ const AppNavbar = ({ deleteUser }) => {
   const navigate = useNavigate();
   const user = useContext(UserContext);
   const  userId= user.id;
-
   const closeLogoutModal = () => {
     setLogoutModalOpen(false);
   };
@@ -36,24 +35,24 @@ const AppNavbar = ({ deleteUser }) => {
       <Navbar.Toggle aria-controls="navbar" />
       <Navbar.Collapse id="navbar">
         <Nav className="ml-auto">
-          <Nav.Link as={NavLink} to={`/users/${userId}/info`} activeClassName="active">
+          <Nav.Link as={NavLink} to={`/users/${userId}/info`} className="nav-link" activeClassName="">
             Info
           </Nav.Link>
           <NavDropdown title="Posts" id="basic-nav-dropdown">
-            <NavDropdown.Item as={NavLink} to={`/all-posts`} activeClassName="active">
+            <NavDropdown.Item as={NavLink} to={`/all-posts`} className="nav-link" activeClassName="">
               all posts
             </NavDropdown.Item>
-            <NavDropdown.Item as={NavLink} to={`/users/${userId}/posts`} activeClassName="active">
+            <NavDropdown.Item as={NavLink} to={`/users/${userId}/posts`} className="nav-link" activeClassName="">
               your Posts
             </NavDropdown.Item>
           </NavDropdown>
-          <Nav.Link as={NavLink} to={`/users/${userId}/todos`} activeClassName="active">
+          <Nav.Link as={NavLink} to={`/users/${userId}/todos`} className="nav-link" activeClassName="">
             Todos
           </Nav.Link>
-          <Nav.Link as={NavLink} to={`/users/${userId}/albums`} activeClassName="active">
+          <Nav.Link as={NavLink} to={`/users/${userId}/albums`} className="nav-link" activeClassName="">
             Albums
           </Nav.Link>
-          <Nav.Link onClick={() => setLogoutModalOpen(true)} activeClassName="active">
+          <Nav.Link onClick={() => setLogoutModalOpen(true)} className="nav-link" activeClassName="">
             Logout
           </Nav.Link>
           {isLogoutModalOpen && <LogoutModal deleteUser={handleLogout} closeModal={closeLogoutModal} />}
@@ -61,6 +60,8 @@ const AppNavbar = ({ deleteUser }) => {
       </Navbar.Collapse>
     </Navbar>
   );
+  
+    
 };
 
 export default AppNavbar;

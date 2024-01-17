@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 
 const withSearch = (WrappedComponent) => {
   return (props) => {
-    const dataKey=props.dataKey;
+    const dataKey = props.dataKey;
     const [searchTerm, setSearchTerm] = useState({ id: '', title: '' });
     const handleSearchChange = (e) => {
       setSearchTerm({
@@ -43,7 +43,9 @@ const withSearch = (WrappedComponent) => {
             </div>
           </div>
           <div className="col-md-9">
-            <WrappedComponent {...combinedProps} />
+            <div className="container-fluid">
+              <WrappedComponent {...combinedProps} />
+            </div>
           </div>
         </div>
       </div>

@@ -21,7 +21,11 @@ const Register = ({ updateUserContext }) => {
           return;
         }
         const registerResponse  = await api.post('users', { email: user.email, website: user.password });
-        updateUserContext(registerResponse.data);
+        const userContextData={
+          id:registerResponse.data.id,
+          email:registerResponse.data.email
+        }
+        updateUserContext(userContextData);
         navigate(`/create-account`);
       }
     } catch (error) {
@@ -36,10 +40,9 @@ const Register = ({ updateUserContext }) => {
     }));
   };
   const isStrongPassword = (password) => {
-    const passwordRegex = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}$/;
+    const passwordRegex = /^(?=.*\d)(?=.*[a-z]).{8,}$/;
     return passwordRegex.test(password);
   };
-
   return (
     <>
       <section className="h-100 gradient-form" style={{ backgroundColor: '#eee' }}>

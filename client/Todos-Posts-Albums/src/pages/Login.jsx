@@ -1,11 +1,9 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import useLocalStorage from '../hooks/useLocalStorage';
 import api from '../Api';
 import '../sass/form.scss'
 const Login = (props) => {
   const navigate = useNavigate();
-  const [user, setUser] = useLocalStorage('user', null);
   const [formUser, setFormUser] = useState({
     email: '',
     password: '',
@@ -24,9 +22,18 @@ const Login = (props) => {
         const foundUser = users[0];
         if (foundUser.email == formUser.email && foundUser.website == formUser.password) {
           console.log('Login successful');
-          setUser(foundUser);
-          props.updateUserContext(foundUser);
-          navigate('/');
+          const userContextData = {
+            id: foundUser.id,
+            name: foundUser.name,
+            username: foundUser.username,
+            email: foundUser.email,
+            address: foundUser.address,
+            phone: foundUser.phone,
+            website: foundUser.website,
+            company: foundUser.company,
+          };
+          props.updateUserContext(userContextData);
+          navigate(`/users/${foundUser.id}/home`);
         } else {
           console.log('Incorrect email or password');
         }

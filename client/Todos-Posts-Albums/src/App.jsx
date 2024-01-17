@@ -10,7 +10,7 @@ import Info from './pages/Info';
 import Error from './pages/Error';
 import Login from './pages/Login';
 import Register from './pages/Register';
-import CreateAccount from './pages/CreateAccount';
+import AddUserDetails from './pages/AddUserDetails';
 import Layout from './components/Layout';
 import PhotosPage from './pages/PhotosPage';
 import PostsPage from './pages/MyPostsPage';
@@ -30,7 +30,7 @@ function App() {
           <Route path="/" element={<Layout deleteUser={deleteUser} />}>
             <Route path="/login" element={<Login updateUserContext={setUser} />} />
             <Route path="/register" element={<Register updateUserContext={setUser} />} />
-            <Route path="/create-account" element={<CreateAccount updateUserContext={setUser} />} />
+            <Route path="/create-account" element={<AddUserDetails updateUserContext={setUser} />} />
             <Route path="users/:userId/"  >
               <Route path="home" index element={<Home />} />
               <Route path="info" element={<Info />} />

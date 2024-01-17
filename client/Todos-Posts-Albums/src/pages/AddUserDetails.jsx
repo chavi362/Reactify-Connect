@@ -2,24 +2,30 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import '../sass/form.scss'
 import api from '../Api';
-const CreateAccount = () => {
+const AddUserDetails = () => {
   const navigate = useNavigate();
   const { email, password } = useParams();
   const [formUser, setFormUser] = useState({
     name: "",
     username: "",
     email: "",
-    street: "",
-    suite: "",
-    city: "",
-    zipcode: "",
-    lat: "",
-    lng: "",
+    address: {
+      street: "",
+      suite: "",
+      city: "",
+      zipcode: ""
+    },
+    geo: {
+      lat: "",
+      lng: "",
+    },
     phone: "",
-    website: "",
-    companyName: "",
-    catchPhrase: "",
-    
+    company: {
+      companyName: "",
+      catchPhrase: "",
+    }
+
+
   });
   useEffect(() => {
     console.log(email)
@@ -63,19 +69,30 @@ const CreateAccount = () => {
                       <p>Let's take more details....</p>
                       <div className="form-outline mb-4">
                         <input
-                          id="form2Example33"
+                          id="username"
+                          className="form-control"
+                          placeholder="Your user name"
+                          value={formUser.username}
+                          onChange={handleChange}
+                          name="username"
+                        />
+                        <label className="form-label" htmlFor="username">
+                        username
+                        </label>
+                      </div>
+                      <div className="form-outline mb-4">
+                        <input
+                          id="full-name"
                           className="form-control"
                           placeholder="Your name"
                           value={formUser.name}
                           onChange={handleChange}
                           name="name"
                         />
-                        <label className="form-label" htmlFor="form2Example33">
+                        <label className="form-label" htmlFor="full-name">
                           Full Name
                         </label>
                       </div>
-
-                      {/* Address Input */}
                       <div className="form-outline mb-4">
                         <input
                           id="form2Example44"
@@ -112,7 +129,7 @@ const CreateAccount = () => {
                             onChange={handleChange}
                             name="city"
                           />
-                           <input
+                          <input
                             className="form-control"
                             placeholder="zip code"
                             value={formUser.zipcode}
@@ -136,12 +153,12 @@ const CreateAccount = () => {
                         <label className="form-label" htmlFor="form2Example77">
                           company catch phrase
                         </label>
-                        <br/><br/>
+                        <br /><br />
                         <button
                           className="btn btn-primary btn-block fa-lg gradient-custom-2 mb-3"
                           type="submit"
                         >
-                  
+
                           Create Account
                         </button>
                       </div>
@@ -166,4 +183,4 @@ const CreateAccount = () => {
   );
 };
 
-export default CreateAccount;
+export default AddUserDetails;
