@@ -13,3 +13,25 @@ Posts Page: Includes an additional feature to view comments associated with each
 Albums Page: Allows users to view a list of albums, search for specific items, and manage photos within each album.
 
 This project integrates React's capabilities to create a smooth user experience, incorporating routing, state management, and asynchronous operations. It also addresses challenges such as page refreshing, data caching, and access control to ensure a robust and user-friendly application.
+## Installation
+
+To run this project locally, follow these steps:
+
+1. Clone the repository:
+
+```bash
+git clone https://github.com/chavi362/Reactify-Connect.git
+```
+
+2. open the server folder in terminal and then run:
+```bash
+בג
+npm install
+npm run json:server
+ ```
+3.open the todos-post-albums folder in terminal and then run:
+
+```bash
+npm install
+npm run dev
+```
