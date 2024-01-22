@@ -25,7 +25,7 @@ git clone https://github.com/chavi362/Reactify-Connect.git
 
 2. open the server folder in terminal and then run:
 ```bash
-בג
+
 npm install
 npm run json:server
  ```
